@@ -108,7 +108,7 @@ console.log(foo);    // undefined
 foo = 1;             // 할당문에서 할당 단계가 실행된다.
 ```
 
-<p align="center"><img src="https://velog.velcdn.com/images/kozel/post/b6df99c3-8c6b-44d0-a9d4-94d7668ab612/image.jpeg" width="300px"><img src="https://velog.velcdn.com/images/kozel/post/aec01fe9-b458-4ca1-9015-cef821d84b2b/image.jpeg" width="300px"></p>
+<p align="center"><img src="https://velog.velcdn.com/images/kozel/post/b6df99c3-8c6b-44d0-a9d4-94d7668ab612/image.jpeg" width="400px"><img src="https://velog.velcdn.com/images/kozel/post/aec01fe9-b458-4ca1-9015-cef821d84b2b/image.jpeg" width="400px"></p>
 
 let 키워드로 선언한 변수는 스코프 시작 시점부터 초기화 단계 시작 지점(변수선언문)까지 변수를 참조할 수 없다. 이 스코프 시작 지점부터 초기화 시작 지점까지 변수를 참조할 수 없는 구간을 **일시적 사각지대**(Temporal Dead Zone)라고 부른다.
 
