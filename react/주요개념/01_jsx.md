@@ -96,7 +96,23 @@ if구문과 for루프는 표현식이 아니기 때문에 조건부 렌더링을
 1. **css style inline**
    스타일 적용도 객체로 전달해야한다
     ```js
+    function App() {
+      const style = {
+        padding: 20,
+        fontSize: '12px',
+      }
+
+      return (
+        <div style={style}>내용</div>
+      )
+    }
     ```
 2. **className**
+   컴포넌트명과 클래스네임을 일치시켜 더 직관적으로 컴포넌트생성할 수 있다
     ```js
+    function DiaryEditor() {
+      return (
+        <div className="DiaryEditor">내용</div>
+      )
+    }
     ```
