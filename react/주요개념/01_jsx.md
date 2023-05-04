@@ -94,6 +94,7 @@ if구문과 for루프는 표현식이 아니기 때문에 조건부 렌더링을
 
 ## Style 적용
 1. **css style inline**
+
    스타일 적용도 객체로 전달해야한다
     ```js
     function App() {
@@ -107,7 +108,38 @@ if구문과 for루프는 표현식이 아니기 때문에 조건부 렌더링을
       )
     }
     ```
+
+    ```js
+    function App() {
+      let name = "nanii";
+
+      const style = {
+        App: {
+          textAlign: 'center',
+          backgroundColor: 'antiquewhite',
+        },
+        h2: {
+          color: 'white',
+        }
+      }
+
+      return (
+        <div style={style.App}>
+          <MyHeader/>
+          <header>
+            <h2 style={style.h2}>안녕 {name}</h2>
+          </header>
+          <MyFooter/>
+      </div>
+      );
+    }
+    ```
+
+
+
 2. **className**
+
+
    컴포넌트명과 클래스네임을 일치시켜 더 직관적으로 컴포넌트생성할 수 있다
     ```js
     function DiaryEditor() {
@@ -116,3 +148,8 @@ if구문과 for루프는 표현식이 아니기 때문에 조건부 렌더링을
       )
     }
     ```
+
+     - 중괄호 내부에는 문자열만 가능하여 className이 여러개인 경우 배열을 넣어 문자열로 형변환 시켜주는 방법도 있다
+        ```js
+        <button className={["MyButton", `MyButton_${type}`].join(' ')} onClick={onClick}>
+        ```
