@@ -2,6 +2,7 @@
 
 React에서 렌더링 로직과 UI로직이 관련 작업을 할 때 시각적으로 보기 좋게 표시하는 Javascript에 XML을 추가한 확장한 문법이다. 브라우저에서 실행하기 전에 바벨을 사용하여 일반 자바스크립트 형태의 코드로 변환된다. 리액트를 사용할 때 JSX문법을 이용하면 하나의 파일에 Javascript 와 HTML 을 동시에 작성할 수 있어 편리하다.
 
+
 ## JSX에 표현식 포함하는 방법
 
 `{ }` 중괄호로 감싸 JSX안에 JS 표현식을 넣어 사용할 수 있다.
@@ -25,6 +26,68 @@ const element = (
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(element);
 ```
+- 유틸함수를 분리하여 더 가독성 있게 컴포넌트를 생성할 수 있다.
+  ```js
+  const person = {
+    name: 'Gregorio Y. Zara',
+    imageId: '7vQD0fP',
+    imageSize: 's',
+    theme: {
+      backgroundColor: 'black',
+      color: 'pink'
+    }
+  };
+
+  function TodoList() {
+    return (
+      <div style={person.theme}>
+        <h1>{person.name}'s Todos</h1>
+        <img
+          className="avatar"
+          src={baseUrl + person.imageId + person.imageSize + '.jpg'}
+          alt={person.name}
+        />
+        <ul>
+          <li>Improve the videophone</li>
+          <li>Prepare aeronautics lectures</li>
+          <li>Work on the alcohol-fuelled engine</li>
+        </ul>
+      </div>
+    );
+  }
+  ```
+
+  ```js
+  export function getImageUrl(person) {
+    return (
+      'https://i.imgur.com/' +
+      person.imageId +
+      person.imageSize +
+      '.jpg'
+    );
+  }
+  ```
+  ```js
+  import { getImageUrl } from './utils.js'
+
+  function TodoList() {
+    return (
+      <div style={person.theme}>
+        <h1>{person.name}'s Todos</h1>
+        <img
+          className="avatar"
+          src={getImageUrl(person)}
+          alt={person.name}
+        />
+        <ul>
+          <li>Improve the videophone</li>
+          <li>Prepare aeronautics lectures</li>
+          <li>Work on the alcohol-fuelled engine</li>
+        </ul>
+      </div>
+    );
+  }
+  ```
 
 ## JSX 속성 정의
 
@@ -34,6 +97,35 @@ root.render(element);
 ```js
 const element = <img src={user.avatarUrl}></img>
 ```
+
+```js
+const person = {
+  name: 'Gregorio Y. Zara',
+  theme: {
+    backgroundColor: 'black',
+    color: 'pink'
+  }
+};
+
+function TodoList() {
+  return (
+    <div style={person.theme}>
+      <h1>{person.name}'s Todos</h1>
+      <img
+        className="avatar"
+        src="https://i.imgur.com/7vQD0fPs.jpg"
+        alt="Gregorio Y. Zara"
+      />
+      <ul>
+        <li>Improve the videophone</li>
+        <li>Prepare aeronautics lectures</li>
+        <li>Work on the alcohol-fuelled engine</li>
+      </ul>
+    </div>
+  );
+}
+```
+
 
 ## JSX 조건부연산자 사용
 
@@ -134,7 +226,6 @@ if구문과 for루프는 표현식이 아니기 때문에 조건부 렌더링을
       );
     }
     ```
-
 
 
 2. **className**
