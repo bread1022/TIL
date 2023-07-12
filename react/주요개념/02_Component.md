@@ -12,7 +12,7 @@ root.render(element);
 
 JS로 UI를 업데이트하는 방법은 new element 를 생성하고 이를 `root.render()`에 전달하는 것이다.
 
-React DOM은 해당 element와 그 자식 element를 이전의 element와 비교하여 원하는 상태에 필요한 경우에만 DOM을 업데이트합니다.
+React DOM은 해당 element와 그 자식 element를 이전의 element와 비교하여 원하는 상태에 필요한 경우에만 DOM을 업데이트한다.
 
 # Components
 
@@ -38,7 +38,7 @@ React DOM은 해당 element와 그 자식 element를 이전의 element와 비교
       return <h1>Hello, {props.name}</h1>;
     }
     ```
-  - React v16이후 React Hooks을 통해 state(useState), lifecycle(useEffect) 관리가 가능해지면서 사용을 많이 하게 되었다.
+  - React v16이후 React Hooks을 통해 state(`useState`), lifecycle(`useEffect`) 관리가 가능해지면서 사용을 많이 하게 되었다.
   - 코드가 직관적이고 메모리자원을 효율적으로 사용할 수 있다
 - **클래스컴포넌트** : Class 로 정의하고 render()함수에서 JSX 코드를 반환한다.
   ```js

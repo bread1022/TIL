@@ -53,7 +53,7 @@ strict mode를 적용하려면 전역의 선두 또는 함수 몸체 선두에 u
 
 #### 함수단위로 엄격모드를 적용하는 경우
 
-- 함수단위로 strict mode를 적용할 수 있어 어떤 함수는 strict mode를 적용하고 어떤 함수는 strict mode를 적용하지 않을 수 있다. 이렇게 되면 모든 함수에 일일이 strict mode를 적용해야 할 수 도 있어 번거로운 작업을 유발할 수 있다. strict mode가 적용된 함수가 참조할 함수 외부의 컨텍스트에 strict mode를 적용하지 않는다면 또 문제가 발생할 수 있기때문에 strict mode는 즉시 실행 함수로 감싼 스크립트 단위로 적용하는 것이 바람직하다.
+- 함수단위로 strict mode를 적용할 수 있어 어떤 함수는 strict mode를 적용하고 어떤 함수는 strict mode를 적용하지 않을 수 있다. 이렇게 되면 모든 함수에 일일이 strict mode를 적용해야할 수 도 있어 번거로운 작업을 유발할 수 있다. strict mode가 적용된 함수가 참조할 함수 외부의 컨텍스트에 strict mode를 적용하지 않는다면 또 문제가 발생할 수 있기때문에 strict mode는 즉시 실행 함수로 감싼 스크립트 단위로 적용하는 것이 바람직하다.
 
 
 ## 20.5 strict mode가 발생시키는 에러
