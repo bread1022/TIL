@@ -15,7 +15,6 @@
 - [Thinking in React](https://github.com/bread1022/TIL/blob/master/react/React-dev/02_Thinking%20in%20React.md)
 
 2주차
-- [Describing the UI]()
 - [Your First Component]()
 - [Importing and Exporting Components]()
 - [Writing Markup with JSX]()
