@@ -34,6 +34,20 @@
 
 15장. [let,const키워드와 블록레벨스코프](https://github.com/bread1022/TIL/blob/master/js/deepdive/15%EC%9E%A5_let%2Cconst%ED%82%A4%EC%9B%8C%EB%93%9C%EC%99%80%20%EB%B8%94%EB%A1%9D%EB%A0%88%EB%B2%A8%EC%8A%A4%EC%BD%94%ED%94%84.md)
 
-16장. [프로퍼티 어트리뷰트]()
+16장. [프로퍼티 어트리뷰트](https://github.com/bread1022/TIL/blob/master/js/deepdive/16%EC%9E%A5_%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0%20%EC%96%B4%ED%8A%B8%EB%A6%AC%EB%B7%B0%ED%8A%B8.md)
 
-17장. [생성자함수에의한 객체생성]()
+17장. [생성자함수에의한 객체생성](https://github.com/bread1022/TIL/blob/master/js/deepdive/17%EC%9E%A5_%EC%83%9D%EC%84%B1%EC%9E%90%ED%95%A8%EC%88%98.md)
+
+18장. [함수와 일급 객체](https://github.com/bread1022/TIL/blob/master/js/deepdive/18%EC%9E%A5_%ED%95%A8%EC%88%98%EC%99%80%20%EC%9D%BC%EA%B8%89%EA%B0%9D%EC%B2%B4.md)
+
+
+19장. [프로토타입](https://github.com/bread1022/TIL/blob/master/js/deepdive/19%EC%9E%A5_%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85.md)
+
+
+20장. [strict mode](https://github.com/bread1022/TIL/blob/master/js/deepdive/20%EC%9E%A5_strict%20mode.md)
+
+
+21장. [빌트인 객체](https://github.com/bread1022/TIL/blob/master/js/deepdive/21%EC%9E%A5_%EB%B9%8C%ED%8A%B8%EC%9D%B8%EA%B0%9D%EC%B2%B4.md)
+
+
+22장. [this](https://github.com/bread1022/TIL/blob/master/js/deepdive/22%EC%9E%A5_this.md)
