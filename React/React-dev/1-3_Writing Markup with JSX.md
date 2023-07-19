@@ -9,7 +9,7 @@
 ## JSX: Putting markup into JavaScript
 > JSX: JavaScript에 마크업 넣기
 
-<p align="center"><img src="https://react-ko.dev/_next/image?url=%2Fimages%2Fdocs%2Fdiagrams%2Fwriting_jsx_sidebar.png&w=750&q=75" /></p>
+<p align="center"><img width="544" alt="비교사진" src="https://github.com/bread1022/TIL/assets/107349637/9712b380-24bf-460f-92ba-6fb5144f2da2"></p>
 
 이전까지 바닐라JS로 생성한 앱은 HTML로 컨텐츠를, CSS로 디자인을, JavaScript로 로직을 작성되었고, JavaScript가 동작하는동안 HTML안에서는 컨텐츠가 마크업되었다.  
 하지만 *웹이 인터렉티브해지면서 로직이 컨텐츠를 결정하는 경우가 많아졌고 JavaScript가 HTML을 담당하게 되면서 리액트에서 렌더링 로직과 마크업이 같은 위치의 컴포넌트에 함께 존재하게 되었다*.

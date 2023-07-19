@@ -11,18 +11,18 @@
 <br>
 
 1주차
-- [Quick Start](https://github.com/bread1022/TIL/blob/master/react/React-dev/01_Quick%20Start.md)
-- [Thinking in React](https://github.com/bread1022/TIL/blob/master/react/React-dev/02_Thinking%20in%20React.md)
+- [Quick Start](https://github.com/bread1022/TIL/blob/master/React/React-dev/0-1_Quick%20Start.md)
+- [Thinking in React](https://github.com/bread1022/TIL/blob/master/React/React-dev/0-2_Thinking%20in%20React.md)
 
 2주차
-- [Your First Component]()
-- [Importing and Exporting Components]()
-- [Writing Markup with JSX]()
-- [JavaScript in JSX with Curly Braces]()
-- [Passing Props to a Component]()
-- [Conditional Rendering]()
-- [Rendering Lists]()
-- [Keeping Components Pure]()
+- [Your First Component](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-1_Your%20First%20Component.md)
+- [Importing and Exporting Components](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-2_Importing%20and%20Exporting%20Components.md)
+- [Writing Markup with JSX](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-3_Writing%20Markup%20with%20JSX.md)
+- [JavaScript in JSX with Curly Braces](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-4_JavaScript%20in%20JSX%20with%20Curly%20Braces.md)
+- [Passing Props to a Component](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-5_Passing%20Props%20to%20a%20Component.md)
+- [Conditional Rendering](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-6_Conditional%20Rendering.md)
+- [Rendering Lists](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-7_Rendering%20Lists.md)
+- [Keeping Components Pure](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-8_Keeping%20Components%20Pure.md)
 
 3주차
 - [Adding Interactivity]()

@@ -89,7 +89,7 @@ function Profile({ person, size, isSepia, thickBorder }) {
 ## Passing JSX as children
 > 자식을 JSX로 전달하기
 
-- JSX 태그 내에 콘텐츠를 중첩하면 부모 컴포넌트는 해당 컨텐츠를 children 으로 인식한다.
+- JSX 태그 내에 콘텐츠를 중첩하면 부모 컴포넌트는 해당 컨텐츠를 `children` 으로 인식한다.
     ```jsx
     <Card>
       <Avatar />

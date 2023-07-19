@@ -1,4 +1,4 @@
-# 4. Importing and Exporting Components
+# Importing and Exporting Components
 
 ## The root component file
 > 루트 컴포넌트 파일

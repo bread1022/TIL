@@ -1,4 +1,4 @@
-# 3. Your First Component
+# Your First Component
 
 ## Components: UI building blocks
 > 컴포넌트 : UI 구성요소
