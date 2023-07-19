@@ -54,9 +54,3 @@ Default export | named exports
 사용시 `import Button from './Button.js'` | 사용시 중괄호로 감싸야 한다. `import { Button } from './Button.js'`
 import 시 다른 이름으로 값을 가져올 수 있다. | 양쪽 파일에서 사용하고자하는 값의 이름이 같아야한다. (=> named import)
 보편적으로 한 파일에서 하나의 컴포넌트만 export할 때 `default export` 방식을 사용 | 여러 컴포넌트를 export 하는 경우 `named export` 방식을 사용
-
-
-
-## Exporting and importing multiple components from the same file
-> 동일한 파일에서 여러 컴포넌트 import 및 export하기
-
