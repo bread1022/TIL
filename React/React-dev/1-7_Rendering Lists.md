@@ -56,3 +56,146 @@ DOM 트리를 업데이트할 때 *리렌더 과정에서 리스트 내부에서
   - 즉석에서 `Math.random()` 메서드로 난수를 사용하지 않아야한다 => 렌더링될 때마다 key가 일치하지 않기때문에 매번 모든 컴포넌트와 DOM이 다시 생성되기 때문이다.
   - 따라서 데이터에 기반한 안정적인 id를 사용해야한다.
 
+
+
+### 과제
+
+#### 방법1
+```jsx
+import { people } from './data.js';
+import { getImageUrl } from './utils.js';
+
+export default function List() {
+  const chemists = people.filter(({profession}) => profession === 'chemist');
+  const others = people.filter(({profession}) => profession !== 'chemist');
+
+  const listItems = (group) => group.map(person =>
+    <li key={person.id}>
+      <img
+        src={getImageUrl(person)}
+        alt={person.name}
+      />
+      <p>
+        <b>{person.name}:</b>
+        {' ' + person.profession + ' '}
+        known for {person.accomplishment}
+      </p>
+    </li>
+  );
+
+  return (
+    <article>
+      <h1>Scientists</h1>
+      <h3>Chemists</h3>
+      <ul>{listItems(chemists)}</ul>
+      <h3>everyoneElse</h3>
+      <ul>{listItems(others)}</ul>
+    </article>
+  );
+}
+```
+
+
+#### 방법2
+```jsx
+import { people } from './data.js';
+import { getImageUrl } from './utils.js';
+
+function ListSection ({title, people}) {
+  return (
+    <>
+      <h3>{title}</h3>
+      <ul>
+      {people.map(({ id, name, profession, accomplishment, imageId }) =>
+        <li key={id}>
+          <img
+            src={getImageUrl(person)}
+            alt={name}
+          />
+          <p>
+            <b>{name}:</b>
+            {' ' + profession + ' '}
+            known for {accomplishment}
+          </p>
+        </li>
+      )}
+      </ul>
+    </>
+  )
+}
+
+export default function List() {
+  const chemists = people.filter(({profession}) => profession === 'chemist');
+  const others = people.filter(({profession}) => profession !== 'chemist');
+
+  return (
+    <article>
+      <h1>Scientists</h1>
+      <ListSection
+        title="Chemists"
+        people={chemists}
+      />
+      <ListSection
+        title="Everyone Else"
+        people={everyoneElse}
+      />
+    </article>
+  );
+}
+```
+
+#### 방법3
+```jsx
+import { people } from './data.js';
+import { getImageUrl } from './utils.js';
+
+let chemists = [];
+let everyoneElse = [];
+// people이 절대 변하지 않는 배열이라면 컴포넌트 밖으로 옮겨서 만들어도 상관없다! (배열을 어떻게 생성했는지는 중요하지 않음)
+people.forEach(person => {
+  if (person.profession === 'chemist') {
+    chemists.push(person);
+  } else {
+    everyoneElse.push(person);
+  }
+});
+
+function ListSection({ title, people }) {
+  return (
+    <>
+      <h2>{title}</h2>
+      <ul>
+        {people.map(person =>
+          <li key={person.id}>
+            <img
+              src={getImageUrl(person)}
+              alt={person.name}
+            />
+            <p>
+              <b>{person.name}:</b>
+              {' ' + person.profession + ' '}
+              known for {person.accomplishment}
+            </p>
+          </li>
+        )}
+      </ul>
+    </>
+  );
+}
+
+export default function List() {
+  return (
+    <article>
+      <h1>Scientists</h1>
+      <ListSection
+        title="Chemists"
+        people={chemists}
+      />
+      <ListSection
+        title="Everyone Else"
+        people={everyoneElse}
+      />
+    </article>
+  );
+}
+```
