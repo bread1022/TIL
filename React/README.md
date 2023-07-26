@@ -25,11 +25,10 @@
 - [Keeping Components Pure](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-8_Keeping%20Components%20Pure.md)
 
 3주차
-- [Adding Interactivity]()
-- [Responding to Events]()
-- [State: A Component's Memory]()
-- [Render and Commit]()
-- [State as a Snapshot]()
-- [Queueing a Series of State Updates]()
-- [Updating Objects in State]()
-- [Updating Arrays in State]()
+- [Responding to Events](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-1_Responding%20to%20events.md)
+- [State: A Component's Memory](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-2_State%3A%20A%20Component's%20Memory.md)
+- [Render and Commit](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-3_Render%20and%20Commit.md)
+- [State as a Snapshot](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-4_State%20as%20a%20Snapshot.md)
+- [Queueing a Series of State Updates](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-5_Queueing%20a%20Series%20of%20State%20Updates.md)
+- [Updating Objects in State](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-6_Updating%20Objects%20in%20State.md)
+- [Updating Arrays in State](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-7_Updating%20Arrays%20in%20State.md)

@@ -1,10 +1,5 @@
 # Updating Arrays in State
 
-- [ ] React state 안의 배열 항목을 추가, 제거 또는 변경하는 방법
-- [ ] 배열 내부의 객체를 업데이트 하는 방법
-- [ ] Immer로 덜 반복적으로 배열을 복사하는 방법
-
-
 ## Updating arrays without mutation
 > 변이 없이 배열 업데이트하기
 
