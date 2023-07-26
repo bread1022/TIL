@@ -1,8 +1,5 @@
 # Queueing a Series of State Updates
 
-- [ ] 일괄처리(배칭, batching)이란 무엇이며 React가 여러 state 업데이트를 처리하는 방법
-- [ ] 동일한 state 변수에서 여러 업데이트를 적용하는 방법
-
 
 ## React batches state updates
 > state 업데이트 일괄처리
@@ -39,7 +36,6 @@ export default function Counter() {
   1. 리액트는 "값을 5로 바꾸기" 를 `Queue`에 추가한다.
   2. 그 다음 "n => n + 1"하는 `updater function`을 `Queue`에 추가한다.
   3. 다음 렌더링 동안 리액트는 `state Queue`를 순회하면서 최종 결과를 저장하여 `useState`에서 반환한다.
-
 
 
 ## What happens if you replace state after updating it
