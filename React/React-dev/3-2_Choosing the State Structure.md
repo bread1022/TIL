@@ -60,10 +60,10 @@ const [position, setPosition] = useState({ x: 0, y: 0 });
 - 필요한 state의 조각수를 모를 때 데이터를 개체나 배열로 그룹화하는 것이 좋으며 사용자 정의 필드를 추가할 수 있는 양식이 있을 때 유용하다.
 - state변수가 객체인 경우, 한 필드의 값을 업데이트할 땐 다른 필드를 명시적으로 복사해야한다.
    ```jsx
-   setPosition({ ...position, x: 100 }) // x의 값을 변경하려면 다른 필드도 명시적으로 복사해야함
+   setPosition({ ...position, x: 100 }) // ⭕️ x의 값을 변경하려면 다른 필드도 명시적으로 복사해야함
    ```
    ```jsx
-   setPosition({ x: 100 }) // x의 값만 업데이트할 수 없음
+   setPosition({ x: 100 }) // ❌ x의 값만 업데이트할 수 없음
    ```
 
 
@@ -149,7 +149,8 @@ export default function FeedbackForm() {
    // 동기화 하기 위해선 추가적으로 useEffect 내부 콜백으로 useState(() => setColor(messageColor), [messageColor]) 등록해줘야함 => 혼란을 야기할 수 있음
    }
    ```
-- 부모 컴포넌트가 나중에 messageColor값을 변경해도 Message 컴포넌트는 state변수를 업데이트하지 않기 때문에 변경된 값이 반영되지 않는다. (첫번째 렌더링 중에만 초기화됨)
+- 부모 컴포넌트가 나중에 messageColor값을 변경해도 Message 컴포넌트는 state변수를 업데이트하지 않기 때문에 변경된 값이 반영되지 않는다.  
+  (첫번째 렌더링 중에만 초기화됨)
    ```jsx
    function Message({ messageColor: color }) {
     ... // 구조분해할당 활용하기!!!!!!!!!

@@ -47,7 +47,9 @@ export default function Accordion() {
 ### Step 1: Remove state from the child components
 > 자식 컴포넌트에서 state 제거
 
-- 자식 컴포넌트에서 개별적으로 가지고 있던 state를 제거하고, 부모 컴포넌트에서의 state를 prop으로 전달받을 수 있도록 매개변수에 추가한다. (=> 부모컴포넌트에 의해 제어되는 컴포넌트가 됨)
+- 자식 컴포넌트에서 개별적으로 가지고 있던 state를 제거하고,  
+  부모 컴포넌트에서의 state를 prop으로 전달받을 수 있도록 매개변수에 추가한다.  
+  (=> 부모컴포넌트에 의해 제어되는 컴포넌트가 됨)
 
 ### Step 2: Pass hardcoded data from the common parent
 > 공통 부모에 하드 코딩된 데이터 전달하기
