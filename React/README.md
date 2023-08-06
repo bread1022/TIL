@@ -32,3 +32,28 @@
 - [Queueing a Series of State Updates](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-5_Queueing%20a%20Series%20of%20State%20Updates.md)
 - [Updating Objects in State](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-6_Updating%20Objects%20in%20State.md)
 - [Updating Arrays in State](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-7_Updating%20Arrays%20in%20State.md)
+
+
+4주차
+- [Reacting to Input with State](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-1_Reacting%20to%20Input%20with%20State.md)
+- [Choosing the State Structure](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-2_Choosing%20the%20State%20Structure.md)
+- [Sharing State Between Components](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-3_Sharing%20State%20Between%20Components.md)
+- [Preserving and Resetting State](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-4_Preserving%20and%20Resetting%20State.md)
+
+
+
+5주차
+- [Extracting State Logic into a Reducer](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-5_Extracting%20State%20Logic%20into%20a%20Reducer.md)
+- [Passing Data Deeply with Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-6_Passing%20Data%20Deeply%20with%20Context.md)
+- [Scaling Up with Reducer and Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-7_Scaling%20Up%20with%20Reducer%20and%20Context.md)
+
+
+6주차
+- [Referencing Values with Refs]()
+- [Manipulating the DOM with Refs]()
+- [Synchronizing with Effects]()
+- [You Might Not Need an Effect]()
+- [Lifecycle of Reactive Effects]()
+- [Separating Events from Effects]()
+- [Removing Effect Dependencies]()
+- [Reusing Logic with Custom Hooks]()
