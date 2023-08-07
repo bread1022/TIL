@@ -125,7 +125,7 @@ function DebouncedButton({ onClick, children }) {
       clearTimeout(timeoutID);
       timeoutID = setTimeout(() => {
         onClick();
-      }, 1000);
+      }, 1000); // 1000초 간격에서 마지막 클릭만 실행 (여러번의 클릭 간격이 짧을 때 앞에 클릭은 무시됨)
     }}>
       {children}
     </button>
