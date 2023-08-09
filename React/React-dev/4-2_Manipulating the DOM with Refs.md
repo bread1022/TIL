@@ -398,7 +398,7 @@ export default function CatFriends() {
           {catList.map((cat, i) => (
             <li
               key={cat.id}
-              // 조검부로 선택된 li element에 ref를 지정함
+              // 조건부로 선택된 li element에 ref를 지정함
               ref={index === i ?
                 selectedRef :
                 null

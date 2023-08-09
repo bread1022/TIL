@@ -3,6 +3,12 @@
 
 
 - 한가지 타입보다 여러가지 타입에서 동작하는 컴포넌트 생성에 사용된다.
+- 보통 API를 호출한 뒤 응답에 대한 규격을 정의할 때 가장 많이 사용된다!
+  ```ts
+  function fetchContacts(): Promise<Response> {
+    // ... Promise 반환타입을 제네릭으로 지정하면 타입 추론이 가능하다
+  }
+  ```
 - 함수를 호출하는 시점에 제네릭값으로 사용할 타입을 넘겨서 사용한다.
     ```ts
     function logText(text: string) {
