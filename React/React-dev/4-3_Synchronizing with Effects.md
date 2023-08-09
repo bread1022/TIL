@@ -9,10 +9,10 @@
 > 컴포넌트의 최상위 레벨에 있는 렌더링 코드는 props와 state를 업데이트하고 JSX를 반환한다. (**순수함수**)
 
 #### Event Handlers
-> 컴포넌트 내부에 중첩된 함수로
-> 사용자의 액션에 의해 발생하는 이벤트 작업을 수행한다.
-> ex. input field 업데이트, HTTP POST 요청 등
-> 사용자의 작업에 의해 발생하는 부수효과(side effect)가 포함되어 있다.
+> 컴포넌트 내부에 중첩된 함수로  
+> 사용자의 액션에 의해 발생하는 이벤트 작업을 수행한다.  
+> ex. input field 업데이트, HTTP POST 요청 등  
+> 사용자의 작업에 의해 발생하는 부수효과(side effect)가 포함되어 있다.  
 > 특정 상호 작용에 의해 발생하면 이벤트!~!!!!!
 
 #### Effect란?
@@ -33,7 +33,7 @@
 
     function MyComponent() {
       useEffect(() => {
-        // 여기의 코드는 매 렌더링 후에 실행됩니다.
+        // 매 렌더링 후에 실행되는 코드
       });
       return <div />;
     }
@@ -62,9 +62,10 @@
    - 의존성을 명시한다.
    - Effect는 모든 렌더링이 아니라 **필요할 때만 재실행되어야 하므로 의존성을 지정**하여 제어해야한다.
    - 의존성 배열을 지정해주면 이전 렌더링과 같을 때 Effect를 실행하지 않는다.
-   - 의존성 배열에 여러개의 요소를 지정하게되면 **모든 의존성이 마지막 렌더링 시점과 정확히 동일한 경우**에만 Effect를 실행하지 않는다. (건너뜀)
-     - `Object.is(a, b)` 메서드로 비교
-   - 의존성 배열에는 `useEffect` 내부에서 사용되는 모든 변수를 지정해야한다. (이때 Ref같이 렌더링과 상관없는, 변경되지않는 변수는 제외함)
+   - 의존성 배열에 여러개의 요소를 지정하게되면  
+  **모든 의존성이 마지막 렌더링 시점과 정확히 동일한 경우**에만 Effect를 실행하지 않는다. (건너뜀)
+     - `Object.is(a, b)` 메서드로 비교한다.
+   - 의존성 배열에는 `useEffect` 내부에서 사용되는 모든 변수를 지정해야한다. (이때 `ref`같이 렌더링과 상관없는, 변경되지않는 변수는 제외함)
       ```jsx
       import { useState, useRef, useEffect } from 'react';
 
@@ -84,8 +85,8 @@
         return <video ref={ref} src={src} loop playsInline />;
       }
       ```
-      - `useEffect`내부에서 사용되는 변수가 `isPlaying`말고 `ref`도 있지만 `ref`를 의존성배열에 추가하지않는 이유 : `ref` 객체가 렌더링할때마다 `useRef`에서 동일한 객체를 반환하기때문에 의존성 배열에 추가할 필요가 없다.  
-      (변하지 않으니 `ref`로 인해서 Effect가 다시 실행되지 않기때문!)
+      - `useEffect`내부에서 사용되는 변수가 `isPlaying`말고 `ref`도 있지만 `ref`를 의존성배열에 추가하지않는 이유 : *`ref` 객체가 렌더링할때마다 `useRef`에서 동일한 객체를 반환하기때문에 의존성 배열에 추가할 필요가 없다.*  
+      *(변하지 않으니 `ref`로 인해서 Effect가 다시 실행되지 않기때문!)*
     - 렌더링 될 때마다 실행
        ```jsx
        useEffect(() => {
@@ -104,7 +105,7 @@
          ... // 컴포넌트 마운트될 때 + a 또는 b 또는 c가 직전 렌더링때와 달라지면 실행
        }, [a, b, c]);
        ```
-3. **Add cleanup if needed**
+1. **Add cleanup if needed**
    - 필요한 경우 클린업함수를 이용하여 Effect가 수행 중이던 작업을 중지하거나 취소하는 기능을 추가해야한다.
       ```js
       export default function ChatRoom() {
@@ -124,10 +125,8 @@
       ```
    - React는 Effect가 다시 실행되기 전에 매번 클린업 함수를 호출하고  
     컴포넌트가 제거될 때(마운트해제) 마지막으로 한번 더 클린업함수를 호출한다.
-   - 개발환경(strict mode)에서 컴포넌트를 다시 마운트하는 건 코드가 깨지지 않는지 확인하기 위함이기때문에 클린업함수를 잘 구현해놓으면 사용자가 체감할 수 있는 차이가 없을 수 있다.
+   - 개발환경(strict mode)에서 컴포넌트를 다시 마운트하는 건 코드가 깨지지 않는지 확인하기 위함이기 때문에 클린업함수를 잘 구현해놓으면 사용자가 체감할 수 있는 차이가 없을 수 있다.
    - strict mode에서 두번 실행되어도 Effect가 문제없이 동작할 수 있는 방법은 클린업 함수를 잘 구현하는 것이고 설정-> 정리 -> 설정 하는 시퀀스를 사용자가 느낄 수 없게 해야한다.
-
-
 
 #### Effect 무한 루프를 생성하는 경우
 
@@ -150,16 +149,15 @@ useEffect(() => {
 
 
 - Effect 내부 코드에서 이벤트를 구독한 경우, 구독을 취소하는 클린업함수를 반환해야한다. (메모리 누수 방지)
-- React 개발환경에서 코드에 버그가 있는지 검사하기 위해  
+- React 개발환경은 코드에 버그가 있는지 검사하기 위해  
   모든 컴포넌트를 최초 마운트 직후에 한번씩 다시 마운트를 한다.
   (컴포넌트가 언마운트되고 다시 마운트되는 것이 아니라 컴포넌트가 마운트된 상태에서 다시 마운트된다.)
-- Effect가 다시 실행되기전 클린업 함수를 호출하고 컴포넌트가 마운트 해제(제거)될 때 마지막으로 한번 더 클린업 함수를 호출하는 것이다.
+- Effect가 다시 실행되기 전 클린업 함수를 호출하고 컴포넌트가 마운트 해제(제거)될 때 마지막으로 한번 더 클린업 함수를 호출해야한다.
 
 
 
 ## Triggering animations
 > 애니메이션 촉발하기
-
 
 - Effect가 애니메이션을 촉발하는 경우 클린업 함수는 애니메이션을 초기값으로 재설정해야한다.
   ```js
@@ -179,7 +177,6 @@ useEffect(() => {
 ## Fetching data
 > 데이터 페칭하기
 
-
 ```jsx
 useEffect(() => {
   let ignore = false;
@@ -195,13 +192,9 @@ useEffect(() => {
   };
 }, [userId]);
 ```
-
-- 네트워크 중복 요청을 방지하기 위해 컴포넌트 간 응답을 캐시하는 해결책으로 `useSomeDataLibrary`를 사용할 수도있다.
-
-
-#### `useSomeDataLibrary`
-
-<!-- TODO: useSomeDataLibrary -->
+- 개발환경에서 네트워크 요청을 보낸 뒤 클린업 함수가 호출되어 관련없는 Fetch를 중단시키거나 무시하게끔한다.
+- 위의 코드에서는 useEffect내부 첫번째 fetchTodos()함수가 호출되어 네트워크 요청을 보내면, 첫번째 Effect는 즉시 정리되어 ignore변수가 true로 설정된다.  
+  만약 개발환경에서 다시 마운트됐을 때 if(!ignore) 조건문으로 인해 state는 업데이트하지 않는다.
 
 
 #### What are good alternatives to data fetching in Effects?
@@ -219,16 +212,20 @@ useEffect(() => {
 ## Sending analytics
 > 분석 보내기
 
-#### `intersection observers`
+#### `intersection observers API`
 
-<!-- TODO: intersection observers -->
+- 루트요소와 타겟요소의 교차점을 관찰하고 타겟요소가 루트요소와 교차하는지 아닌지 구별하는 기능을 제공한다.
+- scroll이벤트와 다르게 교차시 비동기적으로 실행되고
+- 가시성 구분시 reflow를 발생시키지 않는다.
+- 보통 "무한스크롤" 웹사이트와 광고 수익 계산을 위해 광고의 가시성 보고에 사용된다.
+- [참고1 - Intersection Observer - 요소의 가시성 관찰](https://heropy.blog/2019/10/27/intersection-observer/), [참고2 - 실무에서 느낀 점을 곁들인 Intersection Observer API](https://velog.io/@elrion018/%EC%8B%A4%EB%AC%B4%EC%97%90%EC%84%9C-%EB%8A%90%EB%82%80-%EC%A0%90%EC%9D%84-%EA%B3%81%EB%93%A4%EC%9D%B8-Intersection-Observer-API-%EC%A0%95%EB%A6%AC)
 
 
 ## Not an Effect: Initializing the application
-> Effect가 아님: 애플리케이션 초기화하기
+> Effect가 아님: 애플리케이션 초기화
 
 - App컴포넌트가 실행될 때 한번만 실행되어야하는 로직은 컴포넌트 외부에 작성할 수 있다.
-- 외부에 작성한 코드는 브라우저가 페이지를 로드한 후 한 번만 실행된다!!!
+- **외부에 작성한 코드는 브라우저가 페이지를 로드한 후 한 번만 실행된다**!!!
   ```js
   // 브라우저가 페이지 로드한 후 1번만 실행
   if (typeof window !== 'undefined') {
@@ -245,13 +242,92 @@ useEffect(() => {
 
 ## Putting it all together
 
+```jsx
+import { useState, useEffect } from 'react';
 
+function Playground() {
+  const [text, setText] = useState('a');
 
+  useEffect(() => {
+    function onTimeout() {
+      console.log('⏰' + text);
+    }
 
+    console.log('🔵' + text);
+    const timeoutId = setTimeout(onTimeout, 3000);
+
+    return () => {
+      console.log('🟡' + text);
+      clearTimeout(timeoutId);
+    };
+  }, [text]);
+
+  return (
+    <>
+      <label>
+        <input
+          value={text}
+          onChange={e => setText(e.target.value)}
+        />
+      </label>
+    </>
+  );
+}
+
+export default function App() {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <button onClick={() => setShow(!show)}>
+        {show ? 'Unmount' : 'Mount'} the component
+      </button>
+      {show && <hr />}
+      {show && <Playground />}
+    </>
+  );
+}
+```
+- React는 개발환경에서 클린업을 잘 구현했는지 확인하기 위해  
+  컴포넌트를 마운트한 뒤 다시 컴포넌트를 마운트한다.
+- React는 항상 다음 렌더링의 Effect를 실행하기 전에 이전 Effect를 정리하기때문에  
+  input value를 빠르게 입력하더라도 최대 한번만 timeout이 실행되고
+  마운트가 해제되면 마지막렌더링의 Effect는 실행되기 전에 마지막 timeout을 지운다.
+- 만약 클린업함수가 없다면 Effect는 각 렌더링마다 `state`를 캡쳐하고 각각의 timeout을 계속해서 생성한다.
 
 ### Each render has its own Effects
+> 각 렌더링에는 고유한 Effect가 있다.
+
+`useEffect`는 렌더링 결과에 동작의 일부를 추가할 수 있게 한다.
 
 
+```jsx
+export default function ChatRoom({ roomId }) {
+  useEffect(() => {
+    const connection = createConnection(roomId);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [roomId]);
 
+  return <h1>Welcome to {roomId}!</h1>;
+}
+```
+#### 초기렌더링
+- 사용자가 `<ChatRoom roomId={'general'}/>`컴포넌트를 생성
+- Effect : 렌더링 출력의 일부로 'roomId' 채팅방에 연결 메서드를 실행한다.
 
-https://react-ko.dev/learn/synchronizing-with-effects
+#### 리렌더링 (동일한 의존성에 의한 리렌더링)
+- 사용자가 `<ChatRoom roomId={'general'}/>`컴포넌트를 다시 렌더링하는데 이때 출력이 변경되지 않았다고 판단하여 DOM 업데이트를 하지 않는다.
+- React에서 첫번째 렌더링의 roomId와 두번째 렌더링의 roomId를 비교하였을 때 모든 의존성이 동일하기때문에 두번째 렌더링의 Effect는 무시한다. (호출X)
+
+#### 리렌더링 (다른 의존성에 의한 리렌더링)
+- 사용자가 `<ChatRoom roomId={'travel'}/>`컴포넌트를 실행하면 새로운 JSX를 반환하고 React는 DOM을 업데이트한다.
+- Effect : 의존성이 general에서 travel로 달라졌기 때문에 내부 코드가 실행된다.
+- Effect는 클린업함수를 실행하여 마지막으로 실행된 Effect를 우선 정리하고 (`disconnect()` - general)  
+  새로운 Effect를 실행한다. (`connect()` - travel)
+
+#### Unmount
+- 사용자가 `<ChatRoom/>`컴포넌트 마운트해제한 경우 React는 마지막 Effect의 클린업함수를 실행한다. (`disconnect()` - travel)
+
+#### Strict Mode
+- React에서 Strict Mode는 마운트 후 모든 컴포넌트를 다시 한번 마운트한다. (`state`, DOM 보존)
+- 정리가 필요한 Effect를 찾고 [조건경합](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)같은 버그를 발견할 수 있게 해준다.
