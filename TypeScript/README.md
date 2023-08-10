@@ -6,5 +6,5 @@
 - [Type Aliases](https://github.com/bread1022/TIL/blob/master/TypeScript/04_Type%20Aliases.md)
 - [Union Type](https://github.com/bread1022/TIL/blob/master/TypeScript/05_Union%20Type.md)
 - [Enum](https://github.com/bread1022/TIL/blob/master/TypeScript/06_Enum.md)
-- [Class]()
-- [Generics]()
+- [Generics](https://github.com/bread1022/TIL/blob/master/TypeScript/07_Generics.md)
+- [Type Inference, Assertion, Compatibility](https://github.com/bread1022/TIL/blob/master/TypeScript/08_Type.md)
