@@ -18,7 +18,7 @@
   /**
    * 정규표현식 리터럴
    * @param {string} pattern 정규표현식의 패턴
-   * @param {string} flag 정규표현식의 플래스 (g, i, m, u, y)
+   * @param {string} flag 정규표현식의 플래그 (g, i, m, u, y)
    */
   new RegExp(pattern, flag);
 
@@ -37,7 +37,7 @@
   - m : 여러줄의 문자열에서 검색 (multi line)
   - u : 유니코드 전체를 지원 (unicode)
   - y : 문자 내 특정 위치에서 검색 (sticky)
-  - s
+  - s : .이 개행 문자 \n도 포함하도록 ‘dotall’ 모드를 활성화
   - 플래그 생략시, 대소문자를 구별하여 검색한 뒤 첫번째 결과만을 반환한다.
 
 ## 31.3 RegExp 메서드

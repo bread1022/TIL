@@ -65,4 +65,22 @@
 26장. [ES6함수의 추가기능](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/26%EC%9E%A5_ES6%ED%95%A8%EC%88%98%EC%9D%98%20%EC%B6%94%EA%B0%80%EA%B8%B0%EB%8A%A5.md)
 
 
-27장. [배열]()
+27장. [배열](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/27%EC%9E%A5_%EB%B0%B0%EC%97%B4.md)
+
+
+30장. [Date]()
+
+
+31장. [RegExp]()
+
+
+34장. [이터러블]()
+
+
+35장. [스프레드 문법]()
+
+
+36장. [디스트럭처링 할당]()
+
+
+37장. [Set과 Map]()

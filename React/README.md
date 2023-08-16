@@ -49,10 +49,10 @@
 
 
 6주차
-- [Referencing Values with Refs]()
-- [Manipulating the DOM with Refs]()
-- [Synchronizing with Effects]()
-- [You Might Not Need an Effect]()
+- [Referencing Values with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-1_Referencing%20Values%20with%20Refs.md)
+- [Manipulating the DOM with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-2_Manipulating%20the%20DOM%20with%20Refs.md)
+- [Synchronizing with Effects](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-3_Synchronizing%20with%20Effects.md)
+- [You Might Not Need an Effect](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-4_You%20Might%20Not%20Need%20an%20Effect.md)
 - [Lifecycle of Reactive Effects]()
 - [Separating Events from Effects]()
 - [Removing Effect Dependencies]()
