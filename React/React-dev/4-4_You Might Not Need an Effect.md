@@ -1,4 +1,4 @@
-# You Might Not Need an Effect
+# 🌟 You Might Not Need an Effect
 
 Effect를 사용하면 컴포넌트를 네트워크, 브라우저DOM과 같은 외부시스템과 동기화할 수 있다.  
 props나 state가 변경될 때 컴포넌트의 state를 업데이트하려는 경우(외부와 관련x)에는 Effect를 사용하지 않는다.
@@ -61,7 +61,7 @@ function TodoList({ todos, filter }) {
   const [visibleTodos, setVisibleTodos] = useState([]); // ❌ 중복 state 및 불필요한 Effect
 
   useEffect(() => {
-    setVisibleTodos(getFilteredTodos(todos, filter));
+    setVisibleTodos(getFilteredTodos(todos, filter)); // getFilteredTodos 가 오래걸리는 작업일 경우 메모이제이션을 적용하는 게 좋음
   }, [todos, filter]);
   // ...
 }
@@ -81,16 +81,16 @@ import { useMemo, useState } from 'react';
 function TodoList({ todos, filter }) {
   const [newTodo, setNewTodo] = useState('');
 
-  // ✅ todos, filter가 변경될때만 재실행됨
   const visibleTodos = useMemo(() =>
     getFilteredTodos(todos, filter); // 해당 함수와 관련없는 state가 변경되었을 때 불필요한 계산을 하지 않도록함
+  // ✅ todos, filter가 변경될때만 재실행됨
   , [todos, filter]);
   // ...
 }
 ```
 - ### `useMemo`
-  - 초기 렌더링의 반환값을 기억해두었다가 렌더링 중에 의존성이 다른지 확인하고 동일하다면 마지막 저장 결과값을 반환하고
-  - 같지않다면 내부함수를 다시 호출하고 그 결과를 저장한다.
+  - *초기 렌더링의 반환값을 기억해두었다가* 렌더링 중에 의존성이 다른지 확인하고  
+  *동일하다면 마지막 저장 결과값을 반환하고 같지않다면 내부함수를 다시 호출하고 그 결과를 저장*한다.
   - `useMemo`는 업데이트할 때 불필요한 작업을 건너뛰는데에만 도움이 되기때문에 첫번째 렌더링 성능과는 상관이 없다.
   - 따라서 비용이 많이 드는 계산을 캐시할 때 사용하는 것이 좋다.
   - 브라우저에서 성능을 저하시켜서 테스트하고싶다면 [Chrome CPU Throttling](https://developer.chrome.com/blog/new-in-devtools-61/#throttling)을 참고하자.
@@ -124,7 +124,7 @@ export default function ProfilePage({ userId }) {
   );
 }
 
-// ✅ React에서 다른 Key를 전달하면 다른 컴포넌트로 인식하고 state가 자동으로 재설정됨
+// ✅ React에서 다른 Key 🌟 를 전달하면 다른 컴포넌트로 인식하고 state가 자동으로 재설정됨
 function Profile({ userId }) {
   const [comment, setComment] = useState('');
   // ...
@@ -148,7 +148,7 @@ function List({ items }) {
 }
 ```
 - 위의 코드처럼 useEffect 내부에 로직을 넣게되면, 저장되어있던 오래된 값으로 초기 렌더링을 진행한 뒤 React는 DOM을 업데이트하고 Effect를 실행한다. 그 다음 Effect내부의 로직이 실행되면서 다시 업데이트된 값으로 렌더링을 진행하게 되므로 비효율적이다.  
-  그러므로 렌더링 중에 직접 state를 조정할 수 있게끔 로직을 수정하는 것이 좋다.
+  그러므로 *key를 재설정하거나 렌더링 중에 직접 state를 조정할 수 있게끔 로직을 수정하는 것*이 좋다.
 
 
 ```js
@@ -217,7 +217,7 @@ function ProductPage({ product, addToCart }) {
 App이 로드되고 딱 한번만 실행되어야하는 초기화 로직을 useEffect에 넣었다가  
 컴포넌트가 개발모드에 다시 마운트하면서 함수가 두번 호출되는 문제가 발생할 수 있다.  
 이를 방지하기 위해 컴포넌트 마운트당 한번이아니라  
-앱 로드당 한.번. 실행되어야할 땐 변수로 초기화를 체크하고 초기화가 되었으면 다시 실행하지 않는 조건문을 추가해야한다!
+*앱 로드당 한.번. 실행되어야할 땐 변수로 초기화를 체크하고 초기화가 되었으면 다시 실행하지 않는 조건문을 추가*해야한다!
 
 ```js
 let didInit = false;
@@ -238,6 +238,76 @@ function App() {
 
 
 
+## Notifying parent components about state changes
+> state변경을 부모 컴포넌트에 알리기
+
+```js
+function Toggle({ onChange }) {
+  const [isOn, setIsOn] = useState(false);
+
+  // ❌ DOM 렌더링 후 실행되어 onChage핸들러가 너무 늦게 실행된다..!!
+  useEffect(() => {
+    onChange(isOn);
+  }, [isOn, onChange])
+
+  function handleClick() {
+    setIsOn(!isOn);
+  }
+
+  function handleDragEnd(e) {
+    if (isCloserToRightEdge(e)) {
+      setIsOn(true);
+    } else {
+      setIsOn(false);
+    }
+  }
+  // ...
+}
+```
+
+
+```js
+// ✅ 부모컴포넌트에 의해 완전히 제어
+function Toggle({ isOn, onChange }) {
+  function handleClick() {
+    onChange(!isOn);
+  }
+
+  function handleDragEnd(e) {
+    if (isCloserToRightEdge(e)) {
+      onChange(true);
+    } else {
+      onChange(false);
+    }
+  }
+  // Effect를 삭제하고 부모컴포넌트에서 state를 제어하도록 함
+  // ...
+}
+```
+```js
+function Toggle({ onChange }) {
+  const [isOn, setIsOn] = useState(false);
+
+  // ✅ Effect를 삭제하고 동일한 이벤트 핸들러 내에서 state를 업데이트하고 부모컴포넌트에 알림
+  function updateToggle(nextIsOn) {
+    setIsOn(nextIsOn);
+    onChange(nextIsOn);
+  }
+
+  function handleClick() {
+    updateToggle(!isOn);
+  }
+
+  function handleDragEnd(e) {
+    if (isCloserToRightEdge(e)) {
+      updateToggle(true);
+    } else {
+      updateToggle(false);
+    }
+  }
+  // ...
+}
+```
 
 ## Subscribing to an external store
 > 외부 스토어 구독하기
@@ -251,7 +321,7 @@ function App() {
 function subscribe(callback) {
   window.addEventListener('online', callback);
   window.addEventListener('offline', callback);
-  return () => {
+  return () => { // 클린업함수
     window.removeEventListener('online', callback);
     window.removeEventListener('offline', callback);
   };
@@ -259,10 +329,11 @@ function subscribe(callback) {
 
 function useOnlineStatus() {
 
+  // subscribe를 분리함으로써 가독성이 좋아짐
   return useSyncExternalStore(
     subscribe, // React는 동일한 함수를 전달하는 한 다시 구독하지 않음
-    () => navigator.onLine, // 클라이언트 값
-    () => true  // 서버에서의 값
+    () => navigator.onLine, // 클라이언트 값을 가져옴
+    () => true  // 서버에서의 값을 가져옴
   );
 }
 
@@ -276,5 +347,61 @@ function ChatIndicator() {
 ## Fetching data
 > 데이터 페칭하기
 
+```js
+function SearchResults({ query }) {
+  const [results, setResults] = useState([]);
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    let ignore = false;
+    // 비동기 작업으로 인한 경쟁 조건을 방지하기 위해 오래된 응답을 무시하도록 클린업함수를 추가해야함
+    fetchResults(query, page).then(json => {
+      if (!ignore) {
+        setResults(json);
+      }
+    });
+    return () => {
+      ignore = true;
+    };
+  }, [query, page]);
+
+  function handleNextPageClick() {
+    setPage(page + 1);
+  }
+  // ...
+}
+```
+
 - Fetch 함수는 타이핑이벤트로 발생하는 것이 아니기 때문에 이벤트핸들러에 넣을 필요가 없다.
 - 클린업함수를 사용하여 마지막으로 요청된 응답을 제외한 응답을 무시하도록 하는 게 좋다. (경쟁 조건 방지)
+- custom fetch hook을 만들어서 사용하는 것도 좋다.
+    ```js
+    function SearchResults({ query }) {
+      const [page, setPage] = useState(1);
+      const params = new URLSearchParams({ query, page });
+      const results = useData(`/api/search?${params}`);
+
+      function handleNextPageClick() {
+        setPage(page + 1);
+      }
+      // ...
+    }
+
+    function useData(url) {
+      const [data, setData] = useState(null);
+
+      useEffect(() => {
+        let ignore = false;
+        fetch(url)
+          .then(response => response.json())
+          .then(json => {
+            if (!ignore) {
+              setData(json);
+            }
+          });
+        return () => {
+          ignore = true;
+        };
+      }, [url]);
+      return data;
+    }
+    ```

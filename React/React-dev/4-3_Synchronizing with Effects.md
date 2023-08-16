@@ -58,12 +58,12 @@
         return <video ref={ref} src={src} loop playsInline />;
       }
       ```
-2. **Specify the Effect dependencies**
+2. 🌟 **Specify the Effect dependencies**
    - 의존성을 명시한다.
    - Effect는 모든 렌더링이 아니라 **필요할 때만 재실행되어야 하므로 의존성을 지정**하여 제어해야한다.
    - 의존성 배열을 지정해주면 이전 렌더링과 같을 때 Effect를 실행하지 않는다.
    - 의존성 배열에 여러개의 요소를 지정하게되면  
-  **모든 의존성이 마지막 렌더링 시점과 정확히 동일한 경우**에만 Effect를 실행하지 않는다. (건너뜀)
+  **모든 의존성이 마지막 렌더링 시점과 정확히 동일한 경우**에만 Effect를 실행하지 않는다.
      - `Object.is(a, b)` 메서드로 비교한다.
    - 의존성 배열에는 `useEffect` 내부에서 사용되는 모든 변수를 지정해야한다. (이때 `ref`같이 렌더링과 상관없는, 변경되지않는 변수는 제외함)
       ```jsx
@@ -86,7 +86,7 @@
       }
       ```
       - `useEffect`내부에서 사용되는 변수가 `isPlaying`말고 `ref`도 있지만 `ref`를 의존성배열에 추가하지않는 이유 : *`ref` 객체가 렌더링할때마다 `useRef`에서 동일한 객체를 반환하기때문에 의존성 배열에 추가할 필요가 없다.*  
-      *(변하지 않으니 `ref`로 인해서 Effect가 다시 실행되지 않기때문!)*
+      *(변경사항이 감지되지 않기때문에 `ref`로 인해서 Effect가 다시 실행되지 않는다!, `ref.current` 로 접근해도 마찬가지)*
     - 렌더링 될 때마다 실행
        ```jsx
        useEffect(() => {
@@ -102,8 +102,8 @@
      - 의존성이 변경될 때 실행
        ```jsx
        useEffect(() => {
-         ... // 컴포넌트 마운트될 때 + a 또는 b 또는 c가 직전 렌더링때와 달라지면 실행
-       }, [a, b, c]);
+         ... // 컴포넌트 마운트될 때 + a 또는 b 또는 c가 직전 렌더링때와 달라지면 실행 (모든 의존성이 똑같으면 실행X)
+       }, [a, b, c]); // 의존성 조건 OR
        ```
 1. **Add cleanup if needed**
    - 필요한 경우 클린업함수를 이용하여 Effect가 수행 중이던 작업을 중지하거나 취소하는 기능을 추가해야한다.
@@ -149,6 +149,16 @@ useEffect(() => {
 
 
 - Effect 내부 코드에서 이벤트를 구독한 경우, 구독을 취소하는 클린업함수를 반환해야한다. (메모리 누수 방지)
+    ```js
+    useEffect(() => {
+      function handleScroll(e) {
+        console.log(window.scrollX, window.scrollY);
+      }
+      window.addEventListener('scroll', handleScroll);
+      // 이벤트리스너가 계속 켜져있으면 불필요한 메모리 누수가 발생하기때문에 클립업함수를 반환해야함!
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+    ```
 - React 개발환경은 코드에 버그가 있는지 검사하기 위해  
   모든 컴포넌트를 최초 마운트 직후에 한번씩 다시 마운트를 한다.
   (컴포넌트가 언마운트되고 다시 마운트되는 것이 아니라 컴포넌트가 마운트된 상태에서 다시 마운트된다.)
@@ -175,19 +185,19 @@ useEffect(() => {
 
 
 ## Fetching data
-> 데이터 페칭하기
+> 🌟 데이터 페칭하기
 
 ```jsx
 useEffect(() => {
-  let ignore = false;
+  let ignore = false; // 1️⃣ ingore flag 생성
 
   async function startFetching() {
     const json = await fetchTodos(userId); // 네트워크 요청을 보내고
     if (!ignore) setTodos(json);
   }
-  startFetching();
+  startFetching(); // 2️⃣
   return () => {
-    // 클린업함수로 패치를 중단하거나 결과를 무시하게끔함
+    // 3️⃣ 클린업함수로 패치를 중단하거나 결과를 무시하게끔함
     ignore = true;
   };
 }, [userId]);
@@ -258,7 +268,7 @@ function Playground() {
 
     return () => {
       console.log('🟡' + text);
-      clearTimeout(timeoutId);
+      clearTimeout(timeoutId); // 디바운스 - 일정 시간동안 마지막 1번만 실행되도록 함
     };
   }, [text]);
 
@@ -331,3 +341,71 @@ export default function ChatRoom({ roomId }) {
 #### Strict Mode
 - React에서 Strict Mode는 마운트 후 모든 컴포넌트를 다시 한번 마운트한다. (`state`, DOM 보존)
 - 정리가 필요한 Effect를 찾고 [조건경합](https://maxrozen.com/race-conditions-fetching-data-react-with-useeffect)같은 버그를 발견할 수 있게 해준다.
+
+
+-----
+
+#### 과제3
+
+개발자 모드에서 각 컴포넌트를 마운트-언마운트-마운트하는 과정으로 인해 interval이 두번 설정되는 버그를 방지하는 방법 ! => ***클린업함수*** 이용!
+
+```js
+import { useState, useEffect } from 'react';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    function onTick() {
+      setCount(c => c + 1);
+    }
+
+    const time = setInterval(onTick, 1000);
+    return () => clearInterval(time)
+  }, []);
+
+  return <h1>{count}</h1>;
+}
+```
+
+
+----
+
+#### 과제4
+
+비동기 연산에서 예기치 않는 순서로 데이터가 업데이트되는 문제를 해결하는 방법 ! => ***ignore flag***이용!
+
+```js
+import { useState, useEffect } from 'react';
+import { fetchBio } from './api.js';
+
+export default function Page() {
+  const [person, setPerson] = useState('Alice');
+  const [bio, setBio] = useState(null);
+
+  useEffect(() => {
+    let ignore = false;
+    setBio(null);
+    fetchBio(person).then(bio => {
+      if (!ignore) setBio(bio);
+    });
+    return () => {
+      ignore = true;
+    }
+  }, [person]);
+
+  return (
+    <>
+      <select value={person} onChange={e => {
+        setPerson(e.target.value);
+      }}>
+        <option value="Alice">Alice</option>
+        <option value="Bob">Bob</option>
+        <option value="Taylor">Taylor</option>
+      </select>
+      <hr />
+      <p><i>{bio ?? 'Loading...'}</i></p>
+    </>
+  );
+}
+```
