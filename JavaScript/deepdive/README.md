@@ -68,19 +68,19 @@
 27장. [배열](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/27%EC%9E%A5_%EB%B0%B0%EC%97%B4.md)
 
 
-30장. [Date]()
+30장. [Date](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/30%EC%9E%A5_Date.md)
 
 
-31장. [RegExp]()
+31장. [RegExp](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/31%EC%9E%A5_RegExp.md)
 
 
-34장. [이터러블]()
+34장. [이터러블](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/34%EC%9E%A5_%EC%9D%B4%ED%84%B0%EB%9F%AC%EB%B8%94.md)
 
 
-35장. [스프레드 문법]()
+35장. [스프레드 문법](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/35%EC%9E%A5_%EC%8A%A4%ED%94%84%EB%A0%88%EB%93%9C%EB%AC%B8%EB%B2%95.md)
 
 
-36장. [디스트럭처링 할당]()
+36장. [디스트럭처링 할당](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/36%EC%9E%A5_%EB%94%94%EC%8A%A4%ED%8A%B8%EB%9F%AD%EC%B2%98%EB%A7%81%ED%95%A0%EB%8B%B9.md)
 
 
-37장. [Set과 Map]()
+37장. [Set과 Map](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/37%EC%9E%A5_Set%2CMap.md)
