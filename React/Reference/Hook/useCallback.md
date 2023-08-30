@@ -187,7 +187,7 @@ function TodoList() {
     // ❌ 렌더링시마다 함수가 변경되기 때문에 Effect가 계속 발생 => useCallback 사용해보기
   }
   ```
-      렌더링마마다 함수가 새로 생성되기때문에 Effect가 계속 발생한다.
+      렌더링마다 함수가 새로 생성되기때문에 Effect가 계속 발생한다.
   ```js
   function ChatRoom({ roomId }) {
     const [message, setMessage] = useState('');
@@ -208,7 +208,7 @@ function TodoList() {
     }, [createOptions]); // 🔺 createOptions 변경시에만 변경됨
   }
   ```
-      의존성이 동일한 경우 리렌더링 사이 useCallack으로 감싼 함수는 동일하게 적용된다.
+      의존성이 동일한 경우 리렌더링 사이 useCallback으로 감싼 함수는 동일하게 적용된다.
   ```js
   function ChatRoom({ roomId }) {
     const [message, setMessage] = useState('');
@@ -251,10 +251,10 @@ function useRouter() {
   };
 }
 ```
-- 커스텀훅을 작성한 경우 모든 함수를 useCallback으로 감싸면 좋다..!
+- 커스텀훅을 작성한 경우 내부 함수들을 모두 useCallback으로 감싸면 좋다..!
 - hook을 사용할 때마다 코드를 최적화할 수 있기때문이다.
 
-<!-- 이유가 무엇??????? -->
+<!-- 정말로 ?? ??????? -->
 
 
 #### 리렌더링마다 `useCallback`에서 새로운 함수를 반환하는 경우?
