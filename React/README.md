@@ -12,7 +12,7 @@
 
 React - dev | React - Reference
 ---|---
-1주차 | 7주차
+1주차 | 8주차
 [Quick Start](https://github.com/bread1022/TIL/blob/master/React/React-dev/0-1_Quick%20Start.md) | [useState](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useState.md)
 [Thinking in React](https://github.com/bread1022/TIL/blob/master/React/React-dev/0-2_Thinking%20in%20React.md) | [useCallback](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useCallback.md)
 2주차 | [useMemo](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useMemo.md)
@@ -46,6 +46,7 @@ React - dev | React - Reference
 [Manipulating the DOM with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-2_Manipulating%20the%20DOM%20with%20Refs.md) |
 [Synchronizing with Effects](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-3_Synchronizing%20with%20Effects.md) |
 [You Might Not Need an Effect](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-4_You%20Might%20Not%20Need%20an%20Effect.md) |
+7주차 |
 [Lifecycle of Reactive Effects](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-5_Lifecycle%20of%20Reactive%20Effects.md) |
 [Separating Events from Effects](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-5_Lifecycle%20of%20Reactive%20Effects.md) |
 [Removing Effect Dependencies](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-7_Removing%20Effect%20Dependencies.md) |
