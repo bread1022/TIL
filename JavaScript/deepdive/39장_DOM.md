@@ -137,7 +137,7 @@ Document.prototype.querySelectorAll('.className')
 
 #### CSS 선택자 문법 메서드와 getElementBy~ 메서드의 차이
 
-`querySelector`, `querySelectorAll` 메서드는 getElementById, getElementsBy~ 메서드 보다 탐색 속도가 느리지만, 구체적이고 일관된 조건으로 요소 노드를 취득할 수 있다는 장점을 가진다. 따라서 id 어트리뷰트가 있는 요소를 취득할 때를 제외하고는 `querySelector`, `querySelectorAll` 메서드를 사용하는 것이 좋다고 한다.
+`querySelector`, `querySelectorAll` 메서드는 `getElementById`, `getElementsBy~` 메서드 보다 탐색 속도가 느리지만, 구체적이고 일관된 조건으로 요소 노드를 취득할 수 있다는 장점을 가진다. 따라서 id 어트리뷰트가 있는 요소를 취득할 때를 제외하고는 `querySelector`, `querySelectorAll` 메서드를 사용하는 것이 좋다고 한다.
 
 
 ### (5) 특정 노드를 취득할 수 있는지 확인하는 matches()
@@ -151,7 +151,9 @@ Element.prototype.matches()
 
 ### HTMLCollection과 NodeList
 
-DOM 컬렉션 객체인 HTMLCollection과 NodeList는 DOM API가 여러 개의 결과값을 반환하기 위한 DOM 컬렉션 객체이다. HTMLCollection과 NodeList는 모두 유사 배열 객체이면서 이터러블이다. 따라서 `for...of`문으로 순회할 수 있으며 스프레드 문법을 사용하여 간단히 배열로 변환할 수 있다.
+DOM 컬렉션 객체인 HTMLCollection과 NodeList는 DOM API가 여러 개의 결과값을 반환하기 위한 DOM 컬렉션 객체이다.  
+HTMLCollection과 NodeList는 모두 유사 배열 객체이면서 이터러블이다.  
+따라서 `for...of`문으로 순회할 수 있으며 스프레드 문법을 사용하여 간단히 배열로 변환할 수 있다.
 
 #### HTMLCollection
 
@@ -183,7 +185,7 @@ DOM 컬렉션 객체인 HTMLCollection과 NodeList는 DOM API가 여러 개의 �
 
 DOM 트리의 노드를 탐색할 때는 Node, Element 인터페이스에 정의된 프로퍼티를 사용한다.
 - Node.prototype 은 모두 읽기 전용 접근자 프로퍼티이다.
-- HTML문서상 공백 문자는 **`공백 텍스트 노드`**를 생성하므로 노드 탐색시 주의해야한다.
+- HTML문서상 공백 문자는 **`공백 텍스트 노드`** 를 생성하므로 노드 탐색시 주의해야한다.
 
 ### 자식 노드 탐색 프로퍼티
 
