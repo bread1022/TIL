@@ -16,9 +16,9 @@ React - dev | React - Reference
 [Quick Start](https://github.com/bread1022/TIL/blob/master/React/React-dev/0-1_Quick%20Start.md) | [useState](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useState.md)
 [Thinking in React](https://github.com/bread1022/TIL/blob/master/React/React-dev/0-2_Thinking%20in%20React.md) | [useCallback](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useCallback.md)
 2주차 | [useMemo](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useMemo.md)
-[Your First Component](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-1_Your%20First%20Component.md) |
-[Importing and Exporting Components](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-2_Importing%20and%20Exporting%20Components.md) |
-[Writing Markup with JSX](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-3_Writing%20Markup%20with%20JSX.md) |
+[Your First Component](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-1_Your%20First%20Component.md) | [memo](https://github.com/bread1022/TIL/blob/master/React/Reference/APIs/react/memo.md)
+[Importing and Exporting Components](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-2_Importing%20and%20Exporting%20Components.md) | [useReducer](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useReducer.md)
+[Writing Markup with JSX](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-3_Writing%20Markup%20with%20JSX.md) | [useContext](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useContext.md)
 [JavaScript in JSX with Curly Braces](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-4_JavaScript%20in%20JSX%20with%20Curly%20Braces.md) |
 [Passing Props to a Component](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-5_Passing%20Props%20to%20a%20Component.md) |
 [Conditional Rendering](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-6_Conditional%20Rendering.md) |
