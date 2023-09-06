@@ -173,32 +173,32 @@ export default function Form() {
 
 ### 렌더링마다 초기 state 재생성 방지를 위한 초기화 함수
 
-```js
-function createInitialState(username) {
-  // ...
-}
-```
-```js
-function TodoList({ username }) {
-  // ❌ 초기 state를 계산하는 함수를 두번째 인수로 전달하면 렌더링마다 호출됨
-  // (함수를 전달하는 게 아니라 계속해서 함수를 호출해서 계산해야되기때문!!!)
-  const [state, dispatch] = useReducer(reducer, createInitialState(username));
-  // ...
-}
-```
-```js
-function TodoList({ username }) {
-  // 🌟 두번째 인수에는 state만 전달하고, 세번째 인수로 초기화 계산 함수를 전달 !!
-  const [state, dispatch] = useReducer(reducer, username, createInitialState);
-  // 🌟 초기화 함수에 아무런 정보가 필요하지 않을땐 두번째 인자로 null을 전달
-  const [state, dispatch] = useReducer(reducer, null, createInitial);
-  // ...
-}
-```
-
 - `useReducer` Hook은 초기 state를 한번만 계산한다.
 - 두번째 인수로 전달하는 초기 state를 함수를 통해서 계산해야되게끔 전달할 경우 초기 렌더링뿐만아니라 모든 렌더링에서 호출되어 계산하게 된다.(초기화 함수를 호출하는 것이 아니라 함수를 호출해서 계산해야되기때문!! 매우 비효율적)  
   -> 이를 방지하기 위해서는 `useReducer`의 세번째 인수로 초기화 함수를 전달해야한다.
+    ```js
+    function createInitialState(username) {
+      // ...
+    }
+    ```
+    ```js
+    function TodoList({ username }) {
+      // ❌ 초기 state를 계산하는 함수를 두번째 인수로 전달하면 렌더링마다 호출됨
+      // (함수를 전달하는 게 아니라 계속해서 함수를 호출해서 계산해야되기때문!!!)
+      const [state, dispatch] = useReducer(reducer, createInitialState(username));
+      // ...
+    }
+    ```
+    ```js
+    function TodoList({ username }) {
+      // 🌟 두번째 인수에는 state만 전달하고, 세번째 인수로 초기화 계산 함수를 전달 !!
+      const [state, dispatch] = useReducer(reducer, username, createInitialState);
+      // 🌟 초기화 함수에 아무런 정보가 필요하지 않을땐 두번째 인자로 null을 전달
+      const [state, dispatch] = useReducer(reducer, null, createInitial);
+      // ...
+    }
+    ```
+
 
 <br>
 
