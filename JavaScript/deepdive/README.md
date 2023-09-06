@@ -31,7 +31,7 @@
 14주차ㅤ| [26장. ES6함수의 추가기능](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/26%EC%9E%A5_ES6%ED%95%A8%EC%88%98%EC%9D%98%20%EC%B6%94%EA%B0%80%EA%B8%B0%EB%8A%A5.md)
 ㅤ| [27장. 배열](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/27%EC%9E%A5_%EB%B0%B0%EC%97%B4.md)
 15주차 | [30장. Date](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/30%EC%9E%A5_Date.md)
-ㅤ| [30장. RegExp](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/31%EC%9E%A5_RegExp.md)
+ㅤ| [31장. RegExp](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/31%EC%9E%A5_RegExp.md)
 16주차ㅤ| [34장. 이터러블](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/34%EC%9E%A5_%EC%9D%B4%ED%84%B0%EB%9F%AC%EB%B8%94.md)
 ㅤ| [35장. 스프레드 문법](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/35%EC%9E%A5_%EC%8A%A4%ED%94%84%EB%A0%88%EB%93%9C%EB%AC%B8%EB%B2%95.md)
 ㅤ| [36장. 디스트럭처링 할당](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/36%EC%9E%A5_%EB%94%94%EC%8A%A4%ED%8A%B8%EB%9F%AD%EC%B2%98%EB%A7%81%ED%95%A0%EB%8B%B9.md)
