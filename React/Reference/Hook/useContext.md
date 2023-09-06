@@ -72,8 +72,6 @@ function Button () {
   `<ThemeContext.Provider>`의 value를 가져온다.
   - 호출하는 컴포넌트의 내부 Provider와 상관없이 해당 컴포넌트의 상위로 올라 가장 가까운 Provider를 탐색한다!
 
-
-
 ### 데이터를 전달하여 context를 업데이트하는 방법
 
 ```js
@@ -95,18 +93,7 @@ function Page () {
 - context가 변경되어야하는 경우 state를 사용하여 context를 업데이트한다.
 - Provider를 생성하는 컴포넌트에서 state 변수를 선언하고 context value로 state를 전달해야한다!
 
-
-#### 다중 context 사용하기
-
-#### 객체 state를 context에 전달하는 방법
-
-#### 단일 컴포넌트로 providers 추출하는 방법
-
-#### context와 reducer를 함께 사용하는 방법
-
-
 <br>
-
 
 ### fallback 기본값 지정하기
 
@@ -278,4 +265,222 @@ function MyApp() {
 - `createContext(defaultValue)`할 때 설정해놓은 기본값을 왜 사용하지 않느냐?  
   이 경우는 provider가 상위 트리 컴포넌트에 일치하는 provider가 없을 때만 적용되는 것이기때문에 먼저 감싸져있는 provider에 value가 `undefined`라면 `undefined`가 반환되는 것이다. (상위 컴포넌트를 탐색하고~ 탐색해도 없으면 `defaultValue`를 반환하는 것임)
 
-  <!-- ?? 진짜 그런지 확인해보기 -->
+  <!-- ?? ????????진짜 그런지 확인해보기 -->
+
+
+#### 다중 context 사용하기
+
+```js
+import { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext(null); // 테마 context
+const CurrentUserContext = createContext(null); // 사용자 context
+
+export default function MyApp() {
+  const [theme, setTheme] = useState('light');
+  const [currentUser, setCurrentUser] = useState(null);
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      // 하위 컴포넌트 어디서든 theme context를 사용할 수 있음
+      <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+      // 하위 컴포넌트 어디서든 user context를 사용할 수 있음
+        <WelcomePanel />
+        <label>
+          <input
+            type="checkbox"
+            checked={theme === 'dark'}
+            onChange={(e) => {
+              setTheme(e.target.checked ? 'dark' : 'light')
+            }}
+          />
+          Use dark mode
+        </label>
+      </CurrentUserContext.Provider>
+    </ThemeContext.Provider>
+  )
+}
+```
+
+#### 🌟 context가 너무 중첩되어 단일 컴포넌트로 providers 추출하고싶을 때
+
+```js
+import { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext(null);
+const CurrentUserContext = createContext(null);
+
+export default function MyApp() {
+  const [theme, setTheme] = useState('light');
+
+  return (
+    // ✅ Provider들이 포함된 컴포넌트
+    <MyProviders theme={theme} setTheme={setTheme}>
+      <WelcomePanel />
+      <label>
+        <input
+          type="checkbox"
+          checked={theme === 'dark'}
+          onChange={(e) => {
+            setTheme(e.target.checked ? 'dark' : 'light')
+          }}
+        />
+        Use dark mode
+      </label>
+    </MyProviders>
+  );
+}
+
+// 🌟 중첩된 컴포넌트들을 생성해놓고 필요한 곳에서 호출하여 사용함!
+function MyProviders({ children, theme, setTheme }) {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+        {children}
+      </CurrentUserContext.Provider>
+    </ThemeContext.Provider>
+  );
+}
+```
+
+#### 특정 state와 관련된 로직을 분리하기 위해 context와 reducer를 사용하는 방법
+
+1. state를 업데이트하기위한 reducer함수를 생성하고
+2. `useReducer`를 호출하고 state와 dispatch를 context로 전달하는 Provider 컴포넌트를 생성한다.
+  ```js
+  import { createContext, useContext, useReducer } from 'react';
+
+  // 1️⃣ 초기 상태와, action을 받아서 새로운 상태를 반환하는 reducer함수를 생성
+  const initialTasks = [
+    { id: 0, text: 'Philosopher’s Path', done: true },
+    { id: 1, text: 'Visit the temple', done: false },
+    { id: 2, text: 'Drink matcha', done: false }
+  ];
+
+  function tasksReducer(tasks, action) {
+    switch (action.type) {
+      case 'added': {
+        return [...tasks, {
+          id: action.id,
+          text: action.text,
+          done: false
+        }];
+      }
+      case 'changed': {
+        return tasks.map(t => {
+          if (t.id === action.task.id) {
+            return action.task;
+          } else {
+            return t;
+          }
+        });
+      }
+      case 'deleted': {
+        return tasks.filter(t => t.id !== action.id);
+      }
+      default: {
+        throw Error('Unknown action: ' + action.type);
+      }
+    }
+  }
+
+  // 2️⃣ state를 전달할 context, dispatch를 전달할 context를 각각 생성
+  const TasksContext = createContext(null);
+  const TasksDispatchContext = createContext(null);
+
+  // 🌟 여러개의 context 전달하는 단일 Provider 컴포넌트 생성
+  export function TasksProvider({ children }) {
+    const [tasks, dispatch] = useReducer(
+      tasksReducer,
+      initialTasks
+    );
+
+    return (
+      <TasksContext.Provider value={tasks}>
+        <TasksDispatchContext.Provider value={dispatch}>
+          {children}
+        </TasksDispatchContext.Provider>
+      </TasksContext.Provider>
+    );
+  }
+
+  // 🌟 context를 호출할 때 간편한 로직으로 사용할 수 있게 하는 각각의 context 커스텀 훅도 함께 생성하면 좋다.
+  export function useTasks() {
+    return useContext(TasksContext);
+  }
+
+  export function useTasksDispatch() {
+    return useContext(TasksDispatchContext);
+  }
+  ```
+3. Context.Provider를 원하는 위치에 호출하여 컴포넌트들을 감싼다.
+    ```js
+    import AddTask from './AddTask.js';
+    import TaskList from './TaskList.js';
+    import { TasksProvider } from './TasksContext.js';
+
+    export default function TaskApp() {
+      return (
+        // 3️⃣ Provider를 원하는 위치에 호출하여 컴포넌트들을 감싼다.
+        <TasksProvider>
+          <AddTask />
+          <TaskList />
+        </TasksProvider>
+      );
+    }
+    ```
+
+4. 하위 컴포넌트에서 전달받은 context value를 사용할 때는 provider 컴포넌트에서 생성해놓은 커스텀 훅을 사용하여 context를 호출할 수 있다.
+
+```js
+import { useState, useContext } from 'react';
+import { useTasks, useTasksDispatch } from './TasksContext.js';
+// 4️⃣ Context.Provider 컴포넌트에서 생성해놨던 커스텀훅 import
+
+export default function TaskList() {
+  const tasks = useTasks(); // 🌟 taskContext 사용
+  return (
+    <ul>
+      {tasks.map(task => (
+        <li key={task.id}>
+          <Task task={task} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Task({ task }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const dispatch = useTasksDispatch(); // 🌟 dispatchContext 사용
+  // ...
+  return (
+    <label>
+      <input
+        type="checkbox"
+        checked={task.done}
+        onChange={e => {
+          dispatch({
+            type: 'changed',
+            task: {
+              ...task,
+              done: e.target.checked
+            }
+          });
+        }}
+      />
+      {taskContent}
+      <button onClick={() => {
+        dispatch({
+          type: 'deleted',
+          id: task.id
+        });
+      }}>
+        Delete
+      </button>
+    </label>
+  );
+}
+```
