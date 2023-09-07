@@ -351,7 +351,6 @@ function reducer(state, action) {
     function reducer(state, action) {
       switch (action.type) {
         case 'added_todo': {
-          // ✅ Correct: replacing with new state
           return {
             ...state,
             todos: [

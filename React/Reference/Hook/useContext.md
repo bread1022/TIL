@@ -263,10 +263,9 @@ function MyApp() {
     </ThemeContext.Provider>
     ```
 - `createContext(defaultValue)`할 때 설정해놓은 기본값을 왜 사용하지 않느냐?  
-  이 경우는 provider가 상위 트리 컴포넌트에 일치하는 provider가 없을 때만 적용되는 것이기때문에 먼저 감싸져있는 provider에 value가 `undefined`라면 `undefined`가 반환되는 것이다. (상위 컴포넌트를 탐색하고~ 탐색해도 없으면 `defaultValue`를 반환하는 것임)
+  이 경우는 provider가 상위 트리 컴포넌트에 일치하는 provider가 없을 때만 적용되는 것이기때문에 먼저 감싸져있는 provider에 value가 `undefined`라면 `undefined`가 반환되는 것이다. (상위 컴포넌트를 탐색하고~ 탐색해도 없으면 `defaultValue`를 반환하는 것임) => Provider로 안감쌌을 경우 에러처리를 할 수도 있게됨
 
-  <!-- ?? ????????진짜 그런지 확인해보기 -->
-
+  <!--?? 중요한 정보여서 [null]로 넣어서 에러처리하는데 이용할 수도 있는 개념임 -->
 
 #### 다중 context 사용하기
 
