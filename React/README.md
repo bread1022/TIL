@@ -21,9 +21,9 @@ React - dev | React - Reference
 [Writing Markup with JSX](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-3_Writing%20Markup%20with%20JSX.md) | [useReducer](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useReducer.md)
 [JavaScript in JSX with Curly Braces](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-4_JavaScript%20in%20JSX%20with%20Curly%20Braces.md) | [useContext](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useContext.md)
 [Passing Props to a Component](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-5_Passing%20Props%20to%20a%20Component.md) | 10주차
-[Conditional Rendering](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-6_Conditional%20Rendering.md) |
-[Rendering Lists](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-7_Rendering%20Lists.md) |
-[Keeping Components Pure](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-8_Keeping%20Components%20Pure.md) |
+[Conditional Rendering](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-6_Conditional%20Rendering.md) | [createContext](https://github.com/bread1022/TIL/blob/master/React/Reference/APIs/react/createContext.md)
+[Rendering Lists](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-7_Rendering%20Lists.md) | [Suspense](https://github.com/bread1022/TIL/blob/master/React/Reference/Components/react/%3CSuspense%3E.md)
+[Keeping Components Pure](https://github.com/bread1022/TIL/blob/master/React/React-dev/1-8_Keeping%20Components%20Pure.md) | [lazy](https://github.com/bread1022/TIL/blob/master/React/Reference/APIs/react/lazy.md)
 3주차 |
 [Responding to Events](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-1_Responding%20to%20events.md) | 
 [State: A Component's Memory](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-2_State%3A%20A%20Component's%20Memory.md) | 

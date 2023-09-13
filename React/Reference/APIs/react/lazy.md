@@ -11,6 +11,11 @@ import { lazy } from 'react';
 const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 ```
 
+- 크기가 큰 리액트App에서 첫 페이지를 로드하는 즉시 모든 JS 번들을 다운로드하게되면 페이지 성능에 영향을 줄 수 있으므로 코드를 분할 하고 지연로딩을 적용해야한다.
+- React.lazy 함수는 JS 청크로 분리하는 방법을 제공하여 코드 분할 요소를 동적으로 로드할 수 있고  
+  `<Suspense>`는 로드가 완료될 때까지 fallback을 표시할 수 있게한다.
+- 이때 약간의 지연이 발생할 수 있으므로 `<Suspense>` 컴포넌트와 함께 사용하여 로딩 상태를 표시하는 것이 좋다.
+
 ## Parameters
 
 - `load`: `Promise` 또는 다른 `thenable 객체(then 메서드를 가진 Promise 유사객체)`를 반환하는 함수
@@ -65,7 +70,7 @@ export default function MarkdownEditor() {
 - 처음 렌더링될 때까지 로딩을 하지 않고, 실제로 필요할 때 렌더링 시키고자 할 때 lazy를 사용하여 로딩을 지연시킬 수 있다.
 - 로드되는 작업이 비동기로 처리되기 때문에 Suspense 컴포넌트로 감싸서 로드되는 동안 표시할 fallback을 지정할 수 있다.
   - `<Suspense>`로는 지연컴포넌트나 부모컴포넌트를 감싸면 된다.
-- 최상위 컴포넌트의 밖에서 선언해야한다. 컴포넌트 내부에 선언할 경우 리렌더링마다 state가 초기화되기 때문이다.
+- 최상위 컴포넌트의 밖에서 선언해야한다. 컴포넌트 내부에 선언할 경우 리렌더링할 때마다 컴포넌트를 새로 불러오는 것이기때문에 state가 초기화된다.
   ```js
   import { lazy } from 'react';
 
@@ -75,3 +80,4 @@ export default function MarkdownEditor() {
     // ...
   }
   ```
+

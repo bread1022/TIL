@@ -1,6 +1,8 @@
 # `<Suspense>`
 > 로딩이 완료될 때까지 fallback에 전달된 컴포넌트를 표시한다.
 
+*Suspense는 Promise를 catch한다. API call의 Promise를 반환하면, Suspense가 이를 catch하고, Promise가 pending 상태이면 Loading Fallback으로 전환되고, settled(fulfilled, rejected)이면 children으로 전환되는 형태이다.*
+
 ## Props
 
 - `fallback`: 로딩중일 때 실제UI를 대체해서 렌더링할 UI 컴포넌트
@@ -227,7 +229,11 @@ export default function Layout({ children, isPending }) {
 
 - 스트리밍 서버 렌더링 API를 사용하는 경우 서버에서 발생한 오류를 처리하기 위해 `<Suspense> Boundary`를 사용하기도 한다. 컴포넌트가 서버에서 에러를 던져도 React는 렌더링을 중단하지 않고 가장 가까운 Suspense의 fallback을 표시한다.
 - 클라이언트에서는 다시 동일한 컴포넌트를 리렌더링하려고 시도하고, 에러가 발생하면 가장 가까운 `<Error> Boundary`를 표시하고 에러가 발생하지 않으면 성공적으로 렌더링을 하게되는 것이다.
-
+  ```js
+  <Suspense fallback={null}> // 아무것도 안보이게 할 수도 있음
+    {children}
+  </Suspense>
+  ```
 #### 업데이트중에 UI가 폴백으로 대체되는 것을 방지하는 방법 : `startTransition`
 
 - 업데이트하다 컴포넌트 일시중단으로 인한 `<Suspense>` fallback이 표시되는 것을 방지하기위해 `startTransition`을 사용하여 데이터 로드가 충분해질 때까지 state 업데이트를 트랜지션으로 표시한다.
@@ -236,3 +242,54 @@ export default function Layout({ children, isPending }) {
 
 <!--?? 질문 1. useFetch에서 Loading state를 이용해서 로딩중을 표시한 이유 (suspense를 사용하지 않은 이유) -->
 <!-- ?? startTransition?? -->
+
+#### 무분별한 Suspense사용은 로딩 성능 저하를 야기할 수 있다 ?
+
+Suspense가 감싸고 있는 하나의 컴포넌트에서 2개 이상의 요청을 하거나 Suspense 내부 컴포넌트에서 두개 이상의 요청이 발생하면 네트워크 병목 현상이 발생한다. (API 병렬 처리가 불가능하기 때문)
+컴포넌트를 분리하여 각각 Suspense를 감싸는게 UX적으로 좋지 않을 수 있다는 것인데 로딩이 끝나는 시점을 생각해서 적절한 곳에 Suspense를 사용해야한다.
+
+
+#### Suspense 사용 장점
+
+데이터 로딩과 UI 렌더링을 완전히 분리하여 코드 가독성과 유지보수성을 향상시킬 수 있다.  
+[daleseo 블로그 참고](https://www.daleseo.com/react-suspense/#suspense-%EC%82%AC%EC%9A%A9-%ED%9B%84)
+
+```js
+function User({ userId }) {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://...~~`)
+      .then((response) => response.json())
+      .then((user) => {
+        setUser(user);
+        setLoading(false);
+      });
+  });
+
+  if (loading) return <p>사용자 정보 로딩중...</p>;
+  return (
+    <div>
+      <p>{user.name} 님이 작성한 글</p>
+      <Posts userId={userId} />
+    </div>
+  );
+}
+```
+```js
+function User({ resource }) {
+  const user = resource.user.read();
+
+  return (
+    <div>
+      <p>
+        {user.name}({user.email}) 님이 작성한 글
+      </p>
+      <Suspense fallback={<p>글목록 로딩중...</p>}> // 🌟 데이터 로딩 분리
+        <Posts resource={resource} />
+      </Suspense>
+    </div>
+  );
+}
+```
