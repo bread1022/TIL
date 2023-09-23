@@ -119,7 +119,7 @@ const MyComponent = () => {
 }
 ```
 - ref객체를 JSX 노드의 ref속성으로 전달하면 React는 ref객체의 current 프로퍼티를 해당 노드로 설정한다.
-  - DOM 노드 <input> 접근해 focust()와 같은 메서드를 호출할 수 있다.
+  - DOM 노드 <input> 접근해 focus()와 같은 메서드를 호출할 수 있다.
   - 노드가 화면에서 제거되면 current 프로퍼티는 다시 null로 설정된다.
 
 ## ref 재생성 방지하는 방법

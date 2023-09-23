@@ -1,12 +1,5 @@
 # Removing Effect Dependencies
 
-- [ ] Effect 의존성 무한 루프를 수정하는 방법
-- [ ] 의존성을 제거하고자 할 때 해야 할 일
-- [ ] Effect에 “반응”하지 않고 Effect에서 값을 읽는 방법
-- [ ] 객체와 함수 의존성을 피하는 방법과 이유
-- [ ] 의존성 린터를 억제하는 것이 위험한 이유와 대신 할 수 있는 일
-
-
 ## Dependencies should match the code
 > 의존성은 코드와 일치해야한다.
 
