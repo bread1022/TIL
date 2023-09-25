@@ -38,11 +38,23 @@ useEffect(setup, dependencies);
 - setInterval(), clearInterval()
 - window.addEventListener(), window.removeEventListener()
 - animation.start(), animation.reset()
+- 등등..
 
 <br>
 
 ## External system 연결하는 방법
 > 외부 시스템: 네트워크, 브라우저 API, 라이브러리 등등 React로 제어되지 않는 코드 조각을 의미
+
+
+- `useEffect`에 setup 함수와 의존성 배열을 전달한다.
+  - setup 함수는 외부 시스템과 연결을 설정하고, 클린업 함수를 반환한다.
+  - 의존성목록에는 setup 함수에서 참조하는 모든 반응형 값들을 포함해야한다.
+- React에서는 필요할 때마다 setup, clean up 함수를 호출한다.
+  1. 컴포넌트가 마운트될 때마다 setup 함수가 실행된다.
+  2. 의존성배열 내 요소가 변경되어 리렌더링될 때마다 이전 state로 clean up 함수를 실행하고 그 다음 새 state로 setup 함수를 실행한다.
+  3. 컴포넌트가 언마운트될 때 clean up 함수를 실행한다.
+
+#### 채팅연결
 
 ```js
 import { useEffect } from 'react';
@@ -60,13 +72,83 @@ function ChatRoom({ roomId }) {
   }, [serverUrl, roomId]);
 }
 ```
-- `useEffect`에 setup 함수와 의존성 배열을 전달한다.
-  - setup 함수는 외부 시스템과 연결을 설정하고, 클린업 함수를 반환한다.
-  - 의존성목록에는 setup 함수에서 참조하는 모든 반응형 값들을 포함해야한다.
-- React에서는 필요할 때마다 setup, clean up 함수를 호출한다.
-  1. 컴포넌트가 마운트될 때마다 setup 함수가 실행된다.
-  2. 의존성배열 내 요소가 변경되어 리렌더링될 때마다 이전 state로 clean up 함수를 실행하고 그 다음 새 state로 setup 함수를 실행한다.
-  3. 컴포넌트가 언마운트될 때 clean up 함수를 실행한다.
+
+#### 전역 브라우저 이벤트 수신
+
+```js
+import { useEffect, useState } from 'react';
+
+export default function App() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMove = (e) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('pointermove', handleMove);
+    return () => {
+      window.removeEventListener('pointermove', handleMove);
+    };
+  }, []);
+}
+```
+
+#### 애니메이션 트리거하기
+
+```js
+import { useEffect, useState, useRef } from 'react';
+import { FadeIn } from './animation.js';
+
+function WelcomeMessage() {
+  const messageRef = useRef(null);
+
+  useEffect(() => {
+    const animation = new FadeIn(messageRef.current);
+    animation.start(1000);
+    return () => animation.stop();
+  }, []);
+
+  return <h1 ref={ref}>Welcome!</h1>;
+}
+
+// FadeIn (animation.js)
+export class FadeIn {
+  constructor(node) {
+    this.node = node;
+  }
+  start(duration) {
+    this.duration = duration;
+    if (this.duration === 0) {
+      // Jump to end immediately
+      this.onProgress(1);
+    } else {
+      this.onProgress(0);
+      // Start animating
+      this.startTime = performance.now();
+      this.frameId = requestAnimationFrame(() => this.onFrame());
+    }
+  }
+  onFrame() {
+    const timePassed = performance.now() - this.startTime;
+    const progress = Math.min(timePassed / this.duration, 1);
+    this.onProgress(progress);
+    if (progress < 1) {
+      // We still have more frames to paint
+      this.frameId = requestAnimationFrame(() => this.onFrame());
+    }
+  }
+  onProgress(progress) {
+    this.node.style.opacity = progress;
+  }
+  stop() {
+    cancelAnimationFrame(this.frameId);
+    this.startTime = null;
+    this.frameId = null;
+    this.duration = 0;
+  }
+}
+```
+
 
 
 ## Custom Hook으로 Effect 감싸는 방법
@@ -94,3 +176,31 @@ function ChatRoom({ roomId }) {
 
 
 ## Effect의 의전 state를 기반으로 state업데이트 하는 방법
+
+
+
+## 불필요한 객체와 함수 의존성 제거하는 방법
+
+
+
+## Effect에서 최신 props 및 state 읽는 방법
+
+
+## 서버와 클라이언트에 서로 다른 콘텐츠 표시하기 
+
+
+----
+
+### 컴포넌트가 마운트될 때 내 Effect가 두 번 실행될 때
+
+
+### 리렌더링마다 Effect가 실행되는 것을 방지하는 방법
+
+
+### Effect가 무한 실행되는 것을 방지하는 방법
+
+
+### 언마운트안됐는데 클린업 로직이 실행될 때
+
+
+### 시각적인 작업을 수행하는 Effect가 실행되기 전에 화면이 리페인트 되는 것을 방지하는 방법
