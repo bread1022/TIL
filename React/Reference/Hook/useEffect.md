@@ -1,4 +1,5 @@
 # useEffect
+
 > 컴포넌트를 외부 시스템과 동기화할 수 있는 React Hook
 
 ```js
@@ -7,16 +8,15 @@ useEffect(setup, dependencies);
 
 ## Parameter
 
-- setup function: effect 로직이 포함된 함수로 외부 시스템과 동기화하는 로직을 포함한다.
+- `setup function`: effect 로직이 포함된 함수로 외부 시스템과 동기화하는 로직을 포함한다.
   - React 컴포넌트가 DOM에 추가되면 setup 함수가 실행되고,
   - 의존성이 변경되어 리렌더링할 때마다 클린업 함수가 있으면 이전 값으로 클린업 함수를 실행하고 새로운 값으로 setup 함수를 실행한다.
   - 컴포넌트가 DOM에서 제거되면, React는 클린업 함수를 실행한다.
-- dependencies?: setup 코드 내에 참조된 모든 반응형 값들의 목록
+- `dependencies?`: setup 코드 내에 참조된 모든 반응형 값들의 목록
   - 의존성을 지정하지 않으면 리렌더링할 때마다 Effect가 실행된다.
   - 의존성을 전달하지 않을 때: 모든 렌더링, 리렌더링마다 Effect를 실행한다.
   - 빈배열을 전달: 초기 렌더링 후, Effect를 한 번만 실행한다. (반응형 값을 사용하지 않는다면 1번만 실행)
   - 의존성 배열을 전달: 초기 렌더링 후, 변경된 의존성으로 리렌더링한 다음 Effect를 실행한다.
-
 
 ## Returns
 
@@ -35,6 +35,7 @@ useEffect(setup, dependencies);
 - 모든 Effect는 독립적인 프로세스로 작성하고 한번에 하나의 set up, clean up 주기로 작성해야한다.
 
 ### 외부 시스템
+
 - setInterval(), clearInterval()
 - window.addEventListener(), window.removeEventListener()
 - animation.start(), animation.reset()
@@ -43,8 +44,8 @@ useEffect(setup, dependencies);
 <br>
 
 ## External system 연결하는 방법
-> 외부 시스템: 네트워크, 브라우저 API, 라이브러리 등등 React로 제어되지 않는 코드 조각을 의미
 
+> 외부 시스템: 네트워크, 브라우저 API, 라이브러리 등등 React로 제어되지 않는 코드 조각을 의미
 
 - `useEffect`에 setup 함수와 의존성 배열을 전달한다.
   - setup 함수는 외부 시스템과 연결을 설정하고, 클린업 함수를 반환한다.
@@ -149,58 +150,146 @@ export class FadeIn {
 }
 ```
 
-
-
 ## Custom Hook으로 Effect 감싸는 방법
 
+#### windown event listener 로직을 Custom Hook으로 추출
 
+```js
+function useWindowListener(eventType, listener) {
+  useEffect(() => {
+    window.addEventListener(eventType, listener);
+    return () => {
+      window.removeEventListener(eventType, listener);
+    };
+  }, [eventType, listener]);
+}
 
+// 사용시
+const handleMove = (e) => setPosition({ x: e.clientX, y: e.clientY });
+useWindowListener('pointermove', handleMove);
+```
 
+#### target element의 IntersectionObserver 로직을 Custom Hook으로 추출
 
-## React가 아닌 위젯 제어하는 방법
+```js
+function useIntersectionObserver(ref) {
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
+  useEffect(() => {
+    const div = ref.current;
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      setIsIntersecting(entry.isIntersecting);
+    });
+    observer.observe(div, {
+      threshold: 1.0,
+    });
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref]);
 
-
-
+  return isIntersecting;
+}
+```
 
 ## Data fetching 에 Effect를 사용하는 방법
 
+```js
+let ignore = false;
+const [data, setData] = useState(null);
 
+useEffect(() => {
+  if (ignore) return;
 
+  fetch(url).then((result) => {
+    setData(result);
+  });
 
+  return () => {
+    ignore = true;
+  };
+}, []);
+```
 
-## 반응형 의존성을 지정하는 방법
+- ignore flag를 사용하여 Strict mode에 중복 요청을 하지 않도록 클린업함수를 꼭 작성해야한다.
+- 이렇게 하면 네트워크 요청과 응답의 순서가 다르게 도착해도 조건경합이 발생하지 않는다.
+- Effect에서 데이터를 패칭하게 되면 네트워크 워터폴을 만들기가 쉽고 데이터를 미리 로드하거나 캐싱할 수 없기때문에 컴포넌트가 마운트되고 언마운트될 때 데이터 패칭을 해야한다.
+- 프레임워크를 사용하는 경우, 빌트인 데이터 패칭 메커니즘을 사용하는 것이 좋고
+- 또는 client-side 캐시를 사용하기 위해서 React Query나 SWR 를 사용하는 것도 좋다!
 
+## 🌟 불필요한 객체와 함수 의존성 제거하는 방법
 
+- 렌더링 중에 생성된 객체를 의존성 배열에 넣지 않는다.  
+  -> 대신에 Effect 내에서 객체를 생성해서 사용하기!!
+- 함수는 렌더링될 때마다 다른 값으로 인지하기 때문에 렌더링 중에 생성된 함수를 의존성 배열에 넣지 않는다.  
+  -> 대신에 Effect 내에서 선언하여 바로 사용하는 것이 좋음!!!
 
+  ```js
+  function ChatRoom({ roomId }) {
+    const [message, setMessage] = useState('');
 
+    // 렌더링 중에 함수를 생성하고
+    function createOptions() {
+      return {
+        serverUrl: serverUrl,
+        roomId: roomId,
+      };
+    }
 
-## Effect의 의전 state를 기반으로 state업데이트 하는 방법
+    useEffect(() => {
+      const options = createOptions();
+      // ❌ 의존성 배열에 함수를 넣으면 모든 리렌더링 후에 또 다시 실행하게 되는 문제 발생
+      const connection = createConnection();
+      connection.connect();
+      return () => connection.disconnect();
+    }, [createOptions]);
+  }
+  ```
 
+  ```js
+  const serverUrl = 'https://localhost:1234';
 
+  function ChatRoom({ roomId }) {
+    const [message, setMessage] = useState('');
 
-## 불필요한 객체와 함수 의존성 제거하는 방법
+    useEffect(() => {
+      // ✅ Effect 내부에서 함수를 정의하고, 의존성에서 제거하기 !!! 😱
+      function createOptions() {
+        return {
+          serverUrl: serverUrl,
+          roomId: roomId,
+        };
+      }
 
+      const options = createOptions();
+      const connection = createConnection(options);
+      connection.connect();
+      return () => connection.disconnect();
+    }, [roomId]);
 
+    return (
+      //...
+    );
+  }
+  ```
 
-## Effect에서 최신 props 및 state 읽는 방법
+<!-- ## Effect에서 최신 props 및 state 읽는 방법: `useEffectEvent`
+https://react-ko.dev/reference/react/useEffect#reading-the-latest-props-and-state-from-an-effect
+ -->
 
+<br>
 
-## 서버와 클라이언트에 서로 다른 콘텐츠 표시하기 
+### Effect가 무한 실행될 때
 
+1. Effect에서 state를 업데이트하는 경우
+2. state가 업데이트되면서 리렌더링되고, 또 Effect 의존성이 변경될 때
 
-----
+Effect에 꼭 state를 설정해야하는지 다시 한번 확인해보고,  
+외부 시스템과 동기화하는 로직이 아니라면 Effect를 제거하고 로직을 단순화하는 것이 좋다.  
+또한 렌더링에 사용되지 않는 데이터를 저장할 땐 ref를 사용하는 것이 좋다.
 
-### 컴포넌트가 마운트될 때 내 Effect가 두 번 실행될 때
+### 브라우저 화면 리페인팅 도중 깜빡임이 발생할 때: `useLayoutEffect`
 
-
-### 리렌더링마다 Effect가 실행되는 것을 방지하는 방법
-
-
-### Effect가 무한 실행되는 것을 방지하는 방법
-
-
-### 언마운트안됐는데 클린업 로직이 실행될 때
-
-
-### 시각적인 작업을 수행하는 Effect가 실행되기 전에 화면이 리페인트 되는 것을 방지하는 방법
+- 브라우저 리페인팅을 차단하고 Effect를 실행하려면 `useLayoutEffect`를 사용할 수 있다.
+- 이때 Blocking 과정이 필요하므로 성능에 영향을 줄 수 있음을 주의해야한다.
