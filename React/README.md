@@ -33,12 +33,12 @@ React - dev | React - Reference
 [Updating Objects in State](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-6_Updating%20Objects%20in%20State.md) | [useEffect](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useEffect.md)
 [Updating Arrays in State](https://github.com/bread1022/TIL/blob/master/React/React-dev/2-7_Updating%20Arrays%20in%20State.md) | [useInsertionEffect](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useInsertionEffect.md)
 4주차 | [useLayoutEffect](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useLayoutEffect.md)
-[Reacting to Input with State](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-1_Reacting%20to%20Input%20with%20State.md) |
-[Choosing the State Structure](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-2_Choosing%20the%20State%20Structure.md) |
-[Sharing State Between Components](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-3_Sharing%20State%20Between%20Components.md) |
-[Preserving and Resetting State](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-4_Preserving%20and%20Resetting%20State.md) |
-5주차 |
-[Extracting State Logic into a Reducer](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-5_Extracting%20State%20Logic%20into%20a%20Reducer.md) | 
+[Reacting to Input with State](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-1_Reacting%20to%20Input%20with%20State.md) | 13주차
+[Choosing the State Structure](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-2_Choosing%20the%20State%20Structure.md) | [Profiler](https://github.com/bread1022/TIL/blob/master/React/Reference/Components/react/%3CProfiler%3E.md)
+[Sharing State Between Components](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-3_Sharing%20State%20Between%20Components.md) | [Strict Mode](https://github.com/bread1022/TIL/blob/master/React/Reference/Components/react/%3CStrictMode%3E.md)
+[Preserving and Resetting State](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-4_Preserving%20and%20Resetting%20State.md) | [useDebugValue]()
+5주차 | [useDeferredValue]()
+[Extracting State Logic into a Reducer](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-5_Extracting%20State%20Logic%20into%20a%20Reducer.md) | 14주차
 [Passing Data Deeply with Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-6_Passing%20Data%20Deeply%20with%20Context.md) | 
 [Scaling Up with Reducer and Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-7_Scaling%20Up%20with%20Reducer%20and%20Context.md) |
 6주차 |
