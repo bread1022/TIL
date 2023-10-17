@@ -37,7 +37,7 @@ React - dev | React - Reference
 [Choosing the State Structure](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-2_Choosing%20the%20State%20Structure.md) | [Profiler](https://github.com/bread1022/TIL/blob/master/React/Reference/Components/react/%3CProfiler%3E.md)
 [Sharing State Between Components](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-3_Sharing%20State%20Between%20Components.md) | [Strict Mode](https://github.com/bread1022/TIL/blob/master/React/Reference/Components/react/%3CStrictMode%3E.md)
 [Preserving and Resetting State](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-4_Preserving%20and%20Resetting%20State.md) | [useDebugValue]()
-5주차 | [useDeferredValue]()
+5주차 | [useDeferredValue](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useDeferredValue.md)
 [Extracting State Logic into a Reducer](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-5_Extracting%20State%20Logic%20into%20a%20Reducer.md) | 14주차
 [Passing Data Deeply with Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-6_Passing%20Data%20Deeply%20with%20Context.md) | 
 [Scaling Up with Reducer and Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-7_Scaling%20Up%20with%20Reducer%20and%20Context.md) |
