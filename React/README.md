@@ -39,10 +39,10 @@ React - dev | React - Reference
 [Preserving and Resetting State](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-4_Preserving%20and%20Resetting%20State.md) | [useDebugValue]()
 5주차 | [useDeferredValue](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useDeferredValue.md)
 [Extracting State Logic into a Reducer](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-5_Extracting%20State%20Logic%20into%20a%20Reducer.md) | 14주차
-[Passing Data Deeply with Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-6_Passing%20Data%20Deeply%20with%20Context.md) | 
-[Scaling Up with Reducer and Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-7_Scaling%20Up%20with%20Reducer%20and%20Context.md) |
-6주차 |
-[Referencing Values with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-1_Referencing%20Values%20with%20Refs.md) |
+[Passing Data Deeply with Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-6_Passing%20Data%20Deeply%20with%20Context.md) | [useId](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useId.md)
+[Scaling Up with Reducer and Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-7_Scaling%20Up%20with%20Reducer%20and%20Context.md) | [useSyncExternalStore](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useSyncExternalStore.md)
+6주차 | [createPortal](https://github.com/bread1022/TIL/blob/master/React/Reference/APIs/react-dom/createPortal.md)
+[Referencing Values with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-1_Referencing%20Values%20with%20Refs.md) | [flushSync](https://github.com/bread1022/TIL/blob/master/React/Reference/APIs/react-dom/flushSync.md)
 [Manipulating the DOM with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-2_Manipulating%20the%20DOM%20with%20Refs.md) |
 [Synchronizing with Effects](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-3_Synchronizing%20with%20Effects.md) |
 [You Might Not Need an Effect](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-4_You%20Might%20Not%20Need%20an%20Effect.md) |

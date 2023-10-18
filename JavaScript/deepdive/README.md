@@ -2,7 +2,7 @@
 
 ![스크린샷_2023-03-25_오전_12 31 10 2](https://user-images.githubusercontent.com/107349637/227782686-4bf85488-c079-4775-a5c8-c6c288ac201c.jpg)
 
-**모던 자바스크립트 Deep Dive** 를 기반으로 자바스크립트 학습을 진행하는 스터디
+(2023.03.30 ~ 2023.10.17) **모던 자바스크립트 Deep Dive** 를 기반으로 자바스크립트 학습을 진행하는 스터디 
 
 일정ㅤ| 목차
 ---|---
@@ -45,6 +45,6 @@
 ㅤ| [44장. REST API](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/44%EC%9E%A5_REST%20API.md)
 22주차ㅤ| [45장. 프로미스](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/45%EC%9E%A5_Promise.md)
 ㅤ| [46장. 제너레이터, async, await](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/46%EC%9E%A5_async%2Cawait.md)
-23주차ㅤ| [47장. 에러처리]()
-ㅤ| [48장. 모듈]()
-ㅤ| [49장. Babel과 webpack]()
+23주차ㅤ| [47장. 에러처리](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/47%EC%9E%A5_%EC%97%90%EB%9F%AC%EC%B2%98%EB%A6%AC.md)
+ㅤ| [48장. 모듈](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/48%EC%9E%A5_%EB%AA%A8%EB%93%88.md)
+ㅤ| [49장. Babel과 webpack](https://github.com/bread1022/TIL/blob/master/JavaScript/deepdive/49%EC%9E%A5_Babel%2C%20webpack.md)
