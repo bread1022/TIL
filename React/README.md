@@ -43,7 +43,7 @@ React - dev | React - Reference
 [Scaling Up with Reducer and Context](https://github.com/bread1022/TIL/blob/master/React/React-dev/3-7_Scaling%20Up%20with%20Reducer%20and%20Context.md) | [useSyncExternalStore](https://github.com/bread1022/TIL/blob/master/React/Reference/Hook/useSyncExternalStore.md)
 6주차 | [createPortal](https://github.com/bread1022/TIL/blob/master/React/Reference/APIs/react-dom/createPortal.md)
 [Referencing Values with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-1_Referencing%20Values%20with%20Refs.md) | [flushSync](https://github.com/bread1022/TIL/blob/master/React/Reference/APIs/react-dom/flushSync.md)
-[Manipulating the DOM with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-2_Manipulating%20the%20DOM%20with%20Refs.md) |
+[Manipulating the DOM with Refs](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-2_Manipulating%20the%20DOM%20with%20Refs.md) | 끝 👏🏻
 [Synchronizing with Effects](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-3_Synchronizing%20with%20Effects.md) |
 [You Might Not Need an Effect](https://github.com/bread1022/TIL/blob/master/React/React-dev/4-4_You%20Might%20Not%20Need%20an%20Effect.md) |
 7주차 |
